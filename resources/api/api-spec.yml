@@ -1,0 +1,6 @@
+openapi: 3.0.2
+
+info:
+  title: "Swiftype Site Search API"
+  description: "Swiftype Site Search API"
+  version: "1.0"

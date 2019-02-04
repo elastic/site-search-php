@@ -4,3 +4,34 @@ info:
   title: "Swiftype Site Search API"
   description: "Swiftype Site Search API"
   version: "1.0"
+
+components:
+  # Reusable schemas definitions -----------------------------------------------
+  schemas:
+    simpleObject:
+      type: object
+
+  # Reusable responses definitions ----------------------------------------------
+  responses:
+    jsonResponse:
+      description: A simple JSON response.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/simpleObject"
+
+paths:
+  /engines.json:
+    get:
+      operationId: listEngines
+      summary: Retrieves all engines with optional pagination support.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/engines#list
+      tags:
+      - Engine API
+      # requestBody:
+      #   $ref: "#/components/requestBodies/listParamsRequest"
+      # x-codegen-request-body-name: listParams
+      responses:
+        default:
+          $ref: "#/components/responses/jsonResponse"

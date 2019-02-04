@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/swiftype/swiftype-site-search-php/blob/master/logo-app-search.png?raw=true" alt="Elastic Site Search Logo"></p>
+<p align="center"><img src="https://github.com/swiftype/swiftype-site-search-php/blob/master/logo-site-search.png?raw=true" alt="Elastic Site Search Logo"></p>
 
 <p align="center"><a href="https://circleci.com/gh/swiftype/swiftype-site-search-php"><img src="https://circleci.com/gh/swiftype/swiftype-site-search-php.svg" alt="CircleCI build"></a></p>
 

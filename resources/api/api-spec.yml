@@ -1,9 +1,12 @@
 openapi: 3.0.2
 
 info:
-  title: "Swiftype Site Search API"
-  description: "Swiftype Site Search API"
+  title: Swiftype Site Search API
+  description: Swiftype Site Search API
   version: "1.0"
+
+externalDocs:
+  url: https://swiftype.com/documentation/site-search
 
 components:
   # Reusable schemas definitions -----------------------------------------------

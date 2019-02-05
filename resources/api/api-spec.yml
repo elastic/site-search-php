@@ -2,7 +2,7 @@ openapi: 3.0.2
 
 info:
   title: Swiftype Site Search API
-  description: Swiftype Site Search API
+  description: A first-party PHP client for the Elastic Site Search API.
   version: "1.0"
 
 externalDocs:

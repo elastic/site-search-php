@@ -6,12 +6,12 @@
 
 ## Contents
 
-+ [Getting started](#getting-started-)
-+ [Usage](#usage)
-+ [Development](#development)
-+ [FAQ](#faq-)
-+ [Contribute](#contribute-)
-+ [License](#license-)
+- [Getting started](#getting-started-)
+- [Usage](#usage)
+- [Development](#development)
+- [FAQ](#faq-)
+- [Contribute](#contribute-)
+- [License](#license-)
 
 ***
 
@@ -22,10 +22,10 @@ You can install the client in your project by using composer:
 ```bash
 composer require swiftype/swiftype-site-search-php
 ```
+
 ## Usage
 
-
-#### Clients methods
+### Clients methods
 
 Method name |Parameters| Description
 ------------|----------|------------
@@ -33,7 +33,6 @@ Method name |Parameters| Description
 `deleteEngine` | - `$engineName` (required)  | Delete an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/app-search/api/engines#delete)
 `getEngine` | - `$engineName` (required)  | Retrieves an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#one-engine)
 `listEngines` | - `$page`<br /> - `$perPage` | Retrieves all engines with optional pagination support.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#list)
-
 
 ## Development
 
@@ -57,13 +56,13 @@ The client class may be changed in some case. Do not forget to include it in you
 
 If something is not working as expected, please open an [issue](https://github.com/swiftype/swiftype-site-search-php/issues/new).
 
-### Where can I learn more about Site Search?
+### Where can I find the full API documentation ?
 
 Your best bet is to read the [documentation](https://swiftype.com/documentation/site-search).
 
 ### Where else can I go to get help?
 
-You can checkout the [Elastic Site Search community discuss forums](https://discuss.elastic.co/c/site-search).
+You can checkout the [Elastic community discuss forums](https://discuss.elastic.co/c/site-search).
 
 ## Contribute 🚀
 
@@ -74,6 +73,7 @@ We welcome contributors to the project. Before you begin, a couple notes...
 
 ## License 📗
 
-[Apache 2.0](https://github.com/swiftype/swiftype-site-search-php/blob/master/LICENSE) [Elastic](https://github.com/elastic)
+[Apache 2.0](https://github.com/swiftype/swiftype-site-search-php/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
 
 Thank you to all the [contributors](https://github.com/swiftype/swiftype-site-search-php/graphs/contributors)!
+

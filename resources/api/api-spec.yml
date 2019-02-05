@@ -24,6 +24,14 @@ components:
       schema:
         type: string
 
+    documentTypeId:
+      name: document_type_id
+      in: path
+      description: Document type id.
+      required: true
+      schema:
+        type: string
+
   # Reusable request definitions -----------------------------------------------
   #requestBodies:
 
@@ -52,12 +60,13 @@ paths:
         description: The page to fetch. Defaults to 1.
         schema:
           type: string
+        x-codegen-param-name: currentPage
       - name: per_page
         in: query
         description: The number of results per page.
         schema:
           type: string
-      x-codegen-request-body-name: listParams
+        x-codegen-param-name: pageSize
       responses:
         default:
           $ref: "#/components/responses/jsonResponse"
@@ -80,7 +89,6 @@ paths:
         description: Engine languager (null for universal).
         schema:
           type: string
-      x-codegen-request-body-name: engineData
       responses:
         default:
           $ref: "#/components/responses/jsonResponse"
@@ -102,9 +110,65 @@ paths:
       operationId: deleteEngine
       summary: Delete an engine by name.
       externalDocs:
-        url: https://swiftype.com/documentation/app-search/api/engines#delete
+        url: https://swiftype.com/documentation/site-search/engines#destroy
       tags:
       - Engine API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: createDocumentType
+      summary: Create a new document type in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#add-documenttype
+      tags:
+      - Document API
+      parameters:
+      - name: document_type.name
+        in: query
+        required: true
+        description: Document type name.
+        schema:
+          type: string
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+    get:
+      operationId: listDocumentTypes
+      summary: List all document types for an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#documenttypes-all
+      tags:
+      - Document API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    get:
+      operationId: getDocumentType
+      summary: Get a document type by id.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#documenttypes-single
+      tags:
+      - Document API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+    delete:
+      operationId: deleteDocumentType
+      summary: Delete a document type by id.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#documenttypes-delete
+      tags:
+      - Document API
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"

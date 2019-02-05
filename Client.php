@@ -20,6 +20,29 @@ class Client extends \Swiftype\AbstractClient
     // phpcs:disable
 
     /**
+     * Create a new document type in an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#add-documenttype
+     *
+     * @param string $engineName       Name of the engine.
+     * @param string $documentTypeName Document type name.
+     *
+     * @return array
+     */
+    public function createDocumentType($engineName, $documentTypeName)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type.name' => $documentTypeName,
+        ];
+
+        $endpoint = $this->getEndpoint('CreateDocumentType');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Create a new API based engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/engines#create
@@ -43,9 +66,32 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
+     * Delete a document type by id.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#documenttypes-delete
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     *
+     * @return array
+     */
+    public function deleteDocumentType($engineName, $documentTypeId)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+        ];
+
+        $endpoint = $this->getEndpoint('DeleteDocumentType');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Delete an engine by name.
      *
-     * Documentation: https://swiftype.com/documentation/app-search/api/engines#delete
+     * Documentation: https://swiftype.com/documentation/site-search/engines#destroy
      *
      * @param string $engineName Name of the engine.
      *
@@ -58,6 +104,29 @@ class Client extends \Swiftype\AbstractClient
         ];
 
         $endpoint = $this->getEndpoint('DeleteEngine');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Get a document type by id.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#documenttypes-single
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     *
+     * @return array
+     */
+    public function getDocumentType($engineName, $documentTypeId)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+        ];
+
+        $endpoint = $this->getEndpoint('GetDocumentType');
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -85,20 +154,41 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
+     * List all document types for an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#documenttypes-all
+     *
+     * @param string $engineName Name of the engine.
+     *
+     * @return array
+     */
+    public function listDocumentTypes($engineName)
+    {
+        $params = [
+            'engine_name' => $engineName,
+        ];
+
+        $endpoint = $this->getEndpoint('ListDocumentTypes');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Retrieves all engines with optional pagination support.
      *
      * Documentation: https://swiftype.com/documentation/site-search/engines#list
      *
-     * @param string $page    The page to fetch. Defaults to 1.
-     * @param string $perPage The number of results per page.
+     * @param string $currentPage The page to fetch. Defaults to 1.
+     * @param string $pageSize    The number of results per page.
      *
      * @return array
      */
-    public function listEngines($page = null, $perPage = null)
+    public function listEngines($currentPage = null, $pageSize = null)
     {
         $params = [
-            'page' => $page,
-            'per_page' => $perPage,
+            'page' => $currentPage,
+            'per_page' => $pageSize,
         ];
 
         $endpoint = $this->getEndpoint('ListEngines');

@@ -29,10 +29,14 @@ composer require swiftype/swiftype-site-search-php
 
 Method name |Parameters| Description
 ------------|----------|------------
+`createDocumentType` | - `$engineName` (required) <br /> - `$documentTypeName` (required)  | Create a new document type in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-documenttype)
 `createEngine` | - `$engineName` (required) <br /> - `$engineLanguage` | Create a new API based engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#create)
-`deleteEngine` | - `$engineName` (required)  | Delete an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/app-search/api/engines#delete)
+`deleteDocumentType` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | Delete a document type by id.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-delete)
+`deleteEngine` | - `$engineName` (required)  | Delete an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#destroy)
+`getDocumentType` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | Get a document type by id.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-single)
 `getEngine` | - `$engineName` (required)  | Retrieves an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#one-engine)
-`listEngines` | - `$page`<br /> - `$perPage` | Retrieves all engines with optional pagination support.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#list)
+`listDocumentTypes` | - `$engineName` (required)  | List all document types for an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-all)
+`listEngines` | - `$currentPage`<br /> - `$pageSize` | Retrieves all engines with optional pagination support.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#list)
 
 ## Development
 

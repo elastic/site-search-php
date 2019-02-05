@@ -11,7 +11,7 @@ namespace Swiftype\SiteSearch;
 /**
  * Use this class to instantiate new client and all their dependencies.
  *
- * @package Swiftype\AppSearch
+ * @package Swiftype\Site
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */

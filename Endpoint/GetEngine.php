@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class ListEngines extends \Swiftype\Endpoint\AbstractEndpoint
+class GetEngine extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
@@ -26,8 +26,8 @@ class ListEngines extends \Swiftype\Endpoint\AbstractEndpoint
     /**
      * @var string
      */
-    protected $uri = '/engines.json';
+    protected $uri = '/engines/{engine_name}.json';
 
-    protected $paramWhitelist = ['page', 'per_page'];
+    protected $routeParams = ['engine_name'];
     // phpcs:enable
 }

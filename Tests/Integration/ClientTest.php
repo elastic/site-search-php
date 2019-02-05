@@ -36,7 +36,7 @@ class ClientApiTest extends \PHPUnit\Framework\TestCase
      */
     public function testAuthenticationError()
     {
-        $client = ClientBuilder::create("not-a-valid-api-key")->build();
+        $client = ClientBuilder::create('not-a-valid-api-key')->build();
         $client->listEngines();
     }
 }

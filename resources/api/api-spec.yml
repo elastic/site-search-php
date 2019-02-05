@@ -11,7 +11,21 @@ components:
     simpleObject:
       type: object
 
-  # Reusable responses definitions ----------------------------------------------
+  # Reusable parameters definitions --------------------------------------------
+  parameters:
+    engineNameParam:
+      name: engine_name
+      in: path
+      description: Name of the engine.
+      required: true
+      schema:
+        type: string
+
+  # Reusable request definitions -----------------------------------------------
+  #requestBodies:
+
+
+  # Reusable responses definitions ---------------------------------------------
   responses:
     jsonResponse:
       description: A simple JSON response.
@@ -29,9 +43,65 @@ paths:
         url: https://swiftype.com/documentation/site-search/engines#list
       tags:
       - Engine API
-      # requestBody:
-      #   $ref: "#/components/requestBodies/listParamsRequest"
-      # x-codegen-request-body-name: listParams
+      parameters:
+      - name: page
+        in: query
+        description: The page to fetch. Defaults to 1.
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        description: The number of results per page.
+        schema:
+          type: string
+      x-codegen-request-body-name: listParams
       responses:
         default:
           $ref: "#/components/responses/jsonResponse"
+    post:
+      operationId: createEngine
+      summary: Create a new API based engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/engines#create
+      tags:
+      - Engine API
+      parameters:
+      - name: engine.name
+        in: query
+        required: true
+        description: Engine name.
+        schema:
+          type: string
+      - name: engine.language
+        in: query
+        description: Engine languager (null for universal).
+        schema:
+          type: string
+      x-codegen-request-body-name: engineData
+      responses:
+        default:
+          $ref: "#/components/responses/jsonResponse"
+
+  /engines/{engine_name}.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    get:
+      operationId: getEngine
+      summary: Retrieves an engine by name.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/engines#one-engine
+      tags:
+      - Engine API
+      responses:
+        default:
+          $ref: "#/components/responses/jsonResponse"
+    delete:
+      operationId: deleteEngine
+      summary: Delete an engine by name.
+      externalDocs:
+        url: https://swiftype.com/documentation/app-search/api/engines#delete
+      tags:
+      - Engine API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"

@@ -476,7 +476,7 @@ class Client extends \Swiftype\AbstractClient
      * Documentation: https://swiftype.com/documentation/site-search/searching
      *
      * @param string $engineName          Name of the engine.
-     * @param string $queryText           Document external id.
+     * @param string $queryText           Search query text.
      * @param array  $searchRequestParams Search request parameters.
      *
      * @return array
@@ -501,7 +501,7 @@ class Client extends \Swiftype\AbstractClient
      * Documentation: https://swiftype.com/documentation/site-search/autocomplete
      *
      * @param string $engineName          Name of the engine.
-     * @param string $queryText           Document external id.
+     * @param string $queryText           Search query text.
      * @param array  $searchRequestParams Search request parameters.
      *
      * @return array

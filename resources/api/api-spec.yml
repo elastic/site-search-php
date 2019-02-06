@@ -271,7 +271,7 @@ components:
       name: q
       in: query
       x-codegen-param-name: queryText
-      description: Document external id.
+      description: Search query text.
       required: true
       schema:
         type: string

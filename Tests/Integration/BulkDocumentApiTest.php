@@ -55,4 +55,35 @@ class BulkDocumentApiTest extends AbstractEngineTestCase
         $this->assertNotContains(false, $bulkResponse);
         $this->assertEmpty($client->listDocuments($engine, $typeId));
     }
+
+    /**
+     * Test asynchronous bulk indexing and receipt check.
+     */
+    public function testAsyncBulkOperations()
+    {
+        $client = $this->getDefaultClient();
+        $engine = $this->getDefaultEngineName();
+        $typeId = self::getDefaultDocumentType();
+
+        $documents = [
+            ['external_id' => 'doc1', 'fields' => [['name' => 'title', 'value' => 'Doc 1', 'type' => 'string']]],
+            ['external_id' => 'doc2', 'fields' => [['name' => 'title', 'value' => 'Doc 2', 'type' => 'string']]],
+        ];
+
+        $bulkResponse = $client->asyncBulkCreateOrUpdateDocuments($engine, $typeId, $documents);
+        $this->assertCount(count($documents), $bulkResponse);
+        $receiptIds = array_column($bulkResponse, 'id');
+
+        while (!empty($receiptIds)) {
+            $receiptIds = [];
+            $receiptCheckResponse = $client->getDocumentReceipts($receiptIds);
+
+            foreach ($receiptCheckResponse as $receipt) {
+                if ('pending' != $receipt['status']) {
+                    $receiptIds = $receipt['id'];
+                }
+            }
+            usleep(1000);
+        }
+    }
 }

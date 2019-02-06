@@ -29,6 +29,7 @@ composer require swiftype/swiftype-site-search-php
 
 Method name |Parameters| Description
 ------------|----------|------------
+`asyncBulkCreateOrUpdateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Async bulk creation or update of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_indexing)
 `bulkCreateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk creation of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create)
 `bulkCreateOrUpdateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk creation or update of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose)
 `bulkDeleteDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk delete of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_destroy)
@@ -41,6 +42,7 @@ Method name |Parameters| Description
 `deleteDocumentType` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | Delete a document type by id.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-delete)
 `deleteEngine` | - `$engineName` (required)  | Delete an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#destroy)
 `getDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$externalId` (required)  | Retrieve a document from the engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#document-single)
+`getDocumentReceipts` | - `$receiptIds` (required)  | Check the status of document receipts issued by aync bulk indexing.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose)
 `getDocumentType` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | Get a document type by id.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-single)
 `getEngine` | - `$engineName` (required)  | Retrieves an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#one-engine)
 `listDocumentTypes` | - `$engineName` (required)  | List all document types for an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-all)

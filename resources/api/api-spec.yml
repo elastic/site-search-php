@@ -451,3 +451,48 @@ paths:
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents/async_bulk_create_or_update:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: asyncBulkCreateOrUpdateDocuments
+      summary: Async bulk creation or update of documents in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#bulk_indexing
+      tags:
+      - Bulk API
+      parameters:
+      - name: documents
+        in: query
+        required: true
+        description: List of documents to index.
+        schema:
+          $ref: "#/components/schemas/documentIndexBulk"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+
+  /document_receipts.json:
+    post:
+      operationId: getDocumentReceipts
+      summary: Check the status of document receipts issued by aync bulk indexing.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose
+      tags:
+      - Bulk API
+      parameters:
+      - name: ids
+        in: query
+        required: true
+        description: List of ids of documents receipts to check.
+        x-codegen-param-name: receiptIds
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"

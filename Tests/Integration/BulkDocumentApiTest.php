@@ -37,7 +37,7 @@ class BulkDocumentApiTest extends AbstractEngineTestCase
 
         $documents[] = [
             'external_id' => 'doc3',
-            'fields' => [['name' => 'title', 'value' => 'Doc 3', 'type' => 'string']]
+            'fields' => [['name' => 'title', 'value' => 'Doc 3', 'type' => 'string']],
         ];
         $bulkResponse = $client->bulkCreateOrUpdateDocuments($engine, $typeId, $documents);
         $this->assertCount(count($documents), $bulkResponse);

@@ -81,6 +81,166 @@ components:
           fields:
             $ref: "#/components/schemas/documentFieldsUpdate"
 
+    documentTypeList:
+      type: array
+      items:
+        type: string
+
+    functionalBoost:
+      type: object
+      additionalProperties:
+        type: string
+
+    functionalBoosts:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/functionalBoost"
+
+    fieldList:
+      type: array
+      items:
+        type: string
+
+    documentTypeFieldList:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/fieldList"
+
+    sortField:
+      type: object
+      additionalProperties:
+        type: string
+
+    sortDirection:
+      type: object
+      additionalProperties:
+        type: string
+        enum: [asc, desc]
+
+    simpleFilterValue:
+      anyOf:
+      - type: string
+      - type: number
+
+    arrayFilterValue:
+      type: array
+      items:
+        $ref: "#/components/schemas/simpleFilterValue"
+
+    andFilterDefinition:
+      type: object
+      required:
+      - type
+      - values
+      properties:
+        type:
+          type: string
+          enum: [and]
+        values:
+          $ref: "#/components/schemas/arrayFilterValue"
+      additionalProperties: false
+
+    rangeFilterDefinition:
+      type: object
+      required:
+      - type
+      minProperties: 2
+      properties:
+        type:
+          type: string
+          enum: [range]
+        from:
+          type: number
+        to:
+          type: number
+      additionalProperties: false
+
+    geoFilterDefinition:
+      type: object
+      required:
+      - type
+      - max
+      - lat
+      - lon
+      minProperties: 2
+      properties:
+        type:
+          type: string
+          enum: [distance]
+        lat:
+          type: number
+        lon:
+          type: number
+        max:
+          type: number
+      additionalProperties: false
+
+    filterDefinition:
+      anyOf:
+      - $ref: "#/components/schemas/simpleFilterValue"
+      - $ref: "#/components/schemas/arrayFilterValue"
+      - $ref: "#/components/schemas/andFilterDefinition"
+      - $ref: "#/components/schemas/rangeFilterDefinition"
+      - $ref: "#/components/schemas/geoFilterDefinition"
+
+    documentTypeFilterList:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/filterDefinition"
+
+    filterList:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/documentTypeFilterList"
+
+    highlightFieldDefinition:
+      type: object
+      additionalProperties: false
+      required:
+      - size
+      properties:
+        size:
+          type: integer
+        fallback:
+          type: boolean
+
+    documentTypeHighlightFields:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/highlightFieldDefinition"
+
+    highlightList:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/documentTypeHighlightFields"
+
+    searchRequestParams:
+      type: object
+      additionalProperties: false
+      properties:
+        per_page:
+          type: integer
+        page:
+          type: integer
+        functional_boosts:
+          $ref: "#/components/schemas/functionalBoosts"
+        document_types:
+          $ref: "#/components/schemas/documentTypeList"
+        filters:
+          $ref: "#/components/schemas/filterList"
+        facets:
+          $ref: "#/components/schemas/documentTypeFieldList"
+        search_fields:
+          $ref: "#/components/schemas/documentTypeFieldList"
+        fetch_fields:
+          $ref: "#/components/schemas/documentTypeFieldList"
+        sort_field:
+          $ref: "#/components/schemas/sortField"
+        sort_direction:
+          $ref: "#/components/schemas/sortDirection"
+        highlight_fields:
+          $ref: "#/components/schemas/highlightList"
+
   # Reusable parameters definitions --------------------------------------------
   parameters:
     engineNameParam:
@@ -107,8 +267,23 @@ components:
       schema:
         $ref: "#/components/schemas/documentExternalId"
 
+    searchQueryText:
+      name: q
+      in: query
+      x-codegen-param-name: queryText
+      description: Search query text.
+      required: true
+      schema:
+        type: string
+
   # Reusable request definitions -----------------------------------------------
-  #requestBodies:
+  requestBodies:
+    searchRequestParams:
+      description: Search request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/searchRequestParams"
 
 
   # Reusable responses definitions ---------------------------------------------
@@ -474,7 +649,6 @@ paths:
         default:
           $ref: "#/components/responseBodies/jsonResponse"
 
-
   /document_receipts.json:
     post:
       operationId: getDocumentReceipts
@@ -493,6 +667,42 @@ paths:
           type: array
           items:
             type: string
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/search.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: search
+      summary: Run a search request accross an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/searching
+      tags:
+      - Search API
+      parameters:
+      - $ref: "#/components/parameters/searchQueryText"
+      requestBody:
+        $ref: "#/components/requestBodies/searchRequestParams"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/suggest.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: suggest
+      summary: Run an autocomplete search request accross an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/autocomplete
+      tags:
+      - Autocomplete API
+      parameters:
+      - $ref: "#/components/parameters/searchQueryText"
+      requestBody:
+        $ref: "#/components/requestBodies/searchRequestParams"
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"

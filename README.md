@@ -48,6 +48,7 @@ Method name |Parameters| Description
 `listDocumentTypes` | - `$engineName` (required)  | List all document types for an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-all)
 `listDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | List all documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#document-all)
 `listEngines` | - `$currentPage`<br /> - `$pageSize` | Retrieves all engines with optional pagination support.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#list)
+`search` | - `$engineName` (required) <br /> - `$queryText` (required) <br /> - `$seaarchRequestParams` | Run a search request accross an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/searching)
 `updateDocumentFields` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$externalId` (required) <br /> - `$fields` (required)  | Update fields of a document.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#updating_fields)
 
 ## Development

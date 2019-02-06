@@ -81,6 +81,19 @@ components:
           fields:
             $ref: "#/components/schemas/documentFieldsUpdate"
 
+    seaarchRequestParams:
+      type: object
+      additionalProperties: false
+      properties:
+        per_page:
+          type: integer
+        page:
+          type: integer
+        document_types:
+          type: array
+          items:
+            type: string
+
   # Reusable parameters definitions --------------------------------------------
   parameters:
     engineNameParam:
@@ -107,8 +120,23 @@ components:
       schema:
         $ref: "#/components/schemas/documentExternalId"
 
+    searchQueryText:
+      name: q
+      in: query
+      x-codegen-param-name: queryText
+      description: Document external id.
+      required: true
+      schema:
+        type: string
+
   # Reusable request definitions -----------------------------------------------
-  #requestBodies:
+  requestBodies:
+    seaarchRequestParams:
+      description: Search request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/seaarchRequestParams"
 
 
   # Reusable responses definitions ---------------------------------------------
@@ -474,7 +502,6 @@ paths:
         default:
           $ref: "#/components/responseBodies/jsonResponse"
 
-
   /document_receipts.json:
     post:
       operationId: getDocumentReceipts
@@ -493,6 +520,24 @@ paths:
           type: array
           items:
             type: string
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/search.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: search
+      summary: Run a search request accross an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/searching
+      tags:
+      - Search API
+      parameters:
+      - $ref: "#/components/parameters/searchQueryText"
+      requestBody:
+        $ref: "#/components/requestBodies/seaarchRequestParams"
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"

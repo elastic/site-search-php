@@ -471,6 +471,31 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
+     * Run a search request accross an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/searching
+     *
+     * @param string $engineName           Name of the engine.
+     * @param string $queryText            Document external id.
+     * @param array  $seaarchRequestParams Search request parameters.
+     *
+     * @return array
+     */
+    public function search($engineName, $queryText, $seaarchRequestParams = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'q' => $queryText,
+        ];
+
+        $endpoint = $this->getEndpoint('Search');
+        $endpoint->setParams($params);
+        $endpoint->setBody($seaarchRequestParams);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Update fields of a document.
      *
      * Documentation: https://swiftype.com/documentation/site-search/indexing#updating_fields

@@ -17,6 +17,8 @@ namespace Swiftype\SiteSearch\Tests\Integration;
  */
 class AbstractEngineTestCase extends AbstractClientTestCase
 {
+    protected static $defaultDocumentType = 'my-type';
+
     /**
      * Create the default engine before lauching tests.
      */
@@ -24,6 +26,7 @@ class AbstractEngineTestCase extends AbstractClientTestCase
     {
         parent::setUpBeforeClass();
         self::getDefaultClient()->createEngine(self::getDefaultEngineName());
+        self::getDefaultClient()->createDocumentType(self::getDefaultEngineName(), self::getDefaultDocumentType());
     }
 
     /**
@@ -32,5 +35,10 @@ class AbstractEngineTestCase extends AbstractClientTestCase
     public static function tearDownAfterClass()
     {
         self::getDefaultClient()->deleteEngine(self::getDefaultEngineName());
+    }
+
+    protected static function getDefaultDocumentType()
+    {
+        return static::$defaultDocumentType;
     }
 }

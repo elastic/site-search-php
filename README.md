@@ -29,14 +29,20 @@ composer require swiftype/swiftype-site-search-php
 
 Method name |Parameters| Description
 ------------|----------|------------
+`createDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documentExternalId` (required) <br /> - `$documentFields` (required)  | Create a new document in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
 `createDocumentType` | - `$engineName` (required) <br /> - `$documentTypeName` (required)  | Create a new document type in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-documenttype)
 `createEngine` | - `$engineName` (required) <br /> - `$engineLanguage` | Create a new API based engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#create)
+`createOrUpdateDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documentExternalId` (required) <br /> - `$documentFields` (required)  | Create or update a document in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
+`deleteDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$externalId` (required)  | Delete a document from the engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#delete-external-id)
 `deleteDocumentType` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | Delete a document type by id.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-delete)
 `deleteEngine` | - `$engineName` (required)  | Delete an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#destroy)
+`getDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$externalId` (required)  | Retrieve a document from the engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#document-single)
 `getDocumentType` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | Get a document type by id.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-single)
 `getEngine` | - `$engineName` (required)  | Retrieves an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#one-engine)
 `listDocumentTypes` | - `$engineName` (required)  | List all document types for an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-all)
+`listDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | List all documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#document-all)
 `listEngines` | - `$currentPage`<br /> - `$pageSize` | Retrieves all engines with optional pagination support.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#list)
+`updateDocumentFields` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$externalId` (required) <br /> - `$fields` (required)  | Update fields of a document.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#updating_fields)
 
 ## Development
 

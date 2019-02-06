@@ -20,10 +20,10 @@ class ClientApiTest extends AbstractClientTestCase
     /**
      * Test the search API with simple searches and pagination.
      *
-     * @param string  $docType
-     * @param string  $queryText
-     * @param integer $currentPage
-     * @param integer $pageSize
+     * @param string $docType
+     * @param string $queryText
+     * @param int    $currentPage
+     * @param int    $pageSize
      *
      * @testWith ["page", ""]
      *           ["page", "search engine"]
@@ -34,7 +34,9 @@ class ClientApiTest extends AbstractClientTestCase
     {
         $client = $this->getDefaultClient();
         $engine = $this->getDefaultEngineName();
-        $searchParams = ['per_page' => $pageSize, 'page' => $currentPage, "document_types" => [$docType]];
+
+        $searchParams = ['per_page' => $pageSize, 'page' => $currentPage, 'document_types' => [$docType]];
+
         $searchResponse = $client->search($engine, $queryText, $searchParams);
 
         $this->assertEmpty($searchResponse['errors']);
@@ -58,6 +60,74 @@ class ClientApiTest extends AbstractClientTestCase
         $this->assertArrayHasKey('records', $searchResponse);
         $this->assertArrayHasKey($docType, $searchResponse['records']);
         $this->assertCount($expectedRecords, $searchResponse['records'][$docType]);
+    }
+
+    /**
+     * Test using a search boost inside the search query.
+     */
+    public function testBoostedSearch()
+    {
+        $client = $this->getDefaultClient();
+        $engine = $this->getDefaultEngineName();
+
+        $searchParams = ['functional_boosts' => ['page' => ['votes' => 'logarithmic']]];
+
+        $searchResponse = $client->search($engine, 'search engine', $searchParams);
+
+        $this->assertEmpty($searchResponse['errors']);
+    }
+
+    /**
+     * Test using a search sort order inside the search query.
+     *
+     * @param string $sortField
+     * @param string $sortDirection
+     *
+     * @testWith ["votes", "desc"]
+     *           ["title", "desc"]
+     */
+    public function testSortedSearch($sortField, $sortDirection = 'asc')
+    {
+        $client = $this->getDefaultClient();
+        $engine = $this->getDefaultEngineName();
+
+        $searchParams = ['sort_field' => ['page' => $sortField], 'sort_direction' => ['page' => $sortDirection]];
+
+        $searchResponse = $client->search($engine, 'search engine', $searchParams);
+
+        $this->assertEmpty($searchResponse['errors']);
+    }
+
+    /**
+     * Test using a search sort order inside the search query.
+     * Run filtered query to check the doc count is consistent.
+     *
+     * @param string $facetField
+     *
+     * @testWith ["type"]
+     */
+    public function testFacetedSearch($facetField)
+    {
+        $client = $this->getDefaultClient();
+        $engine = $this->getDefaultEngineName();
+
+        $searchParams = ['facets' => ['page' => [$facetField]]];
+
+        $searchResponse = $client->search($engine, 'search engine', $searchParams);
+
+        $this->assertEmpty($searchResponse['errors']);
+        $this->assertNotEmpty($searchResponse['info']['page']['facets'][$facetField]);
+
+        $filterValues = array_slice($searchResponse['info']['page']['facets'][$facetField], 0, 10);
+
+        foreach ($filterValues as $filterValue => $docCount) {
+            $filteredSearchParams = ['filters' => ['page' => [$facetField => $filterValue]]];
+
+            $filteredSearchResponse = $client->search($engine, 'search engine', $filteredSearchParams);
+
+            $this->assertEmpty($filteredSearchResponse['errors']);
+            $this->assertEquals($docCount, $filteredSearchResponse['info']['page']['total_result_count']);
+        }
     }
 
     /**

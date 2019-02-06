@@ -475,13 +475,13 @@ class Client extends \Swiftype\AbstractClient
      *
      * Documentation: https://swiftype.com/documentation/site-search/searching
      *
-     * @param string $engineName           Name of the engine.
-     * @param string $queryText            Document external id.
-     * @param array  $seaarchRequestParams Search request parameters.
+     * @param string $engineName          Name of the engine.
+     * @param string $queryText           Document external id.
+     * @param array  $searchRequestParams Search request parameters.
      *
      * @return array
      */
-    public function search($engineName, $queryText, $seaarchRequestParams = null)
+    public function search($engineName, $queryText, $searchRequestParams = null)
     {
         $params = [
             'engine_name' => $engineName,
@@ -490,7 +490,7 @@ class Client extends \Swiftype\AbstractClient
 
         $endpoint = $this->getEndpoint('Search');
         $endpoint->setParams($params);
-        $endpoint->setBody($seaarchRequestParams);
+        $endpoint->setBody($searchRequestParams);
 
         return $this->performRequest($endpoint);
     }

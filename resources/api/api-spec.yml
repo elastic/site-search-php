@@ -70,6 +70,17 @@ components:
           fields:
             $ref: "#/components/schemas/documentFieldList"
 
+    documentUpdateBulk:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          external_id:
+            $ref: "#/components/schemas/documentExternalId"
+          fields:
+            $ref: "#/components/schemas/documentFieldsUpdate"
+
   # Reusable parameters definitions --------------------------------------------
   parameters:
     engineNameParam:
@@ -413,7 +424,7 @@ paths:
         required: true
         description: List of documents to update.
         schema:
-          $ref: "#/components/schemas/documentIndexBulk"
+          $ref: "#/components/schemas/documentUpdateBulk"
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"

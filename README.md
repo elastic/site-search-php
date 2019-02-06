@@ -29,6 +29,10 @@ composer require swiftype/swiftype-site-search-php
 
 Method name |Parameters| Description
 ------------|----------|------------
+`bulkCreateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk creation of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create)
+`bulkCreateOrUpdateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk creation or update of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose)
+`bulkDeleteDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk delete of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_destroy)
+`bulkUpdateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk update of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_update)
 `createDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documentExternalId` (required) <br /> - `$documentFields` (required)  | Create a new document in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
 `createDocumentType` | - `$engineName` (required) <br /> - `$documentTypeName` (required)  | Create a new document type in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-documenttype)
 `createEngine` | - `$engineName` (required) <br /> - `$engineLanguage` | Create a new API based engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#create)

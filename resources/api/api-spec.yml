@@ -17,6 +17,11 @@ components:
     documentExternalId:
       type: string
 
+    documentExternalIdList:
+      type: array
+      items:
+        $ref: "#/components/schemas/documentExternalId"
+
     documentFieldSimpleValue:
       anyOf:
       - type: string
@@ -53,6 +58,17 @@ components:
       type: object
       additionalProperties:
         $ref: "#/components/schemas/documentFieldValue"
+
+    documentIndexBulk:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          external_id:
+            $ref: "#/components/schemas/documentExternalId"
+          fields:
+            $ref: "#/components/schemas/documentFieldList"
 
   # Reusable parameters definitions --------------------------------------------
   parameters:
@@ -332,6 +348,95 @@ paths:
         description: Updated fields.
         schema:
           $ref: "#/components/schemas/documentFieldsUpdate"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents/bulk_create_or_update_verbose:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: bulkCreateOrUpdateDocuments
+      summary: Bulk creation or update of documents in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose
+      tags:
+      - Bulk API
+      parameters:
+      - name: documents
+        in: query
+        required: true
+        description: List of documents to index.
+        schema:
+          $ref: "#/components/schemas/documentIndexBulk"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents/bulk_create:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: bulkCreateDocuments
+      summary: Bulk creation of documents in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#bulk_create
+      tags:
+      - Bulk API
+      parameters:
+      - name: documents
+        in: query
+        required: true
+        description: List of documents to create.
+        schema:
+          $ref: "#/components/schemas/documentIndexBulk"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents/bulk_update:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: bulkUpdateDocuments
+      summary: Bulk update of documents in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#bulk_update
+      tags:
+      - Bulk API
+      parameters:
+      - name: documents
+        in: query
+        required: true
+        description: List of documents to update.
+        schema:
+          $ref: "#/components/schemas/documentIndexBulk"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents/bulk_destroy:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: bulkDeleteDocuments
+      summary: Bulk delete of documents in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#bulk_destroy
+      tags:
+      - Bulk API
+      parameters:
+      - name: documents
+        in: query
+        required: true
+        description: List of deleted documents external ids.
+        schema:
+          $ref: "#/components/schemas/documentExternalIdList"
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"

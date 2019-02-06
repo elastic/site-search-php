@@ -14,6 +14,46 @@ components:
     simpleObject:
       type: object
 
+    documentExternalId:
+      type: string
+
+    documentFieldSimpleValue:
+      anyOf:
+      - type: string
+      - type: number
+
+    documentFieldValue:
+      anyOf:
+      - $ref: "#/components/schemas/documentFieldSimpleValue"
+      - type: array
+        items:
+          $ref: "#/components/schemas/documentFieldSimpleValue"
+
+    documentField:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - value
+      - type
+      properties:
+        name:
+          type: string
+        value:
+          $ref: "#/components/schemas/documentFieldValue"
+        type:
+          type: string
+
+    documentFieldList:
+      type: array
+      items:
+        $ref: "#/components/schemas/documentField"
+
+    documentFieldsUpdate:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/documentFieldValue"
+
   # Reusable parameters definitions --------------------------------------------
   parameters:
     engineNameParam:
@@ -23,6 +63,22 @@ components:
       required: true
       schema:
         type: string
+
+    documentTypeId:
+      name: document_type_id
+      in: path
+      description: Document type id.
+      required: true
+      schema:
+        type: string
+
+    documentExternalId:
+      name: external_id
+      in: path
+      description: Document external id.
+      required: true
+      schema:
+        $ref: "#/components/schemas/documentExternalId"
 
   # Reusable request definitions -----------------------------------------------
   #requestBodies:
@@ -52,12 +108,13 @@ paths:
         description: The page to fetch. Defaults to 1.
         schema:
           type: string
+        x-codegen-param-name: currentPage
       - name: per_page
         in: query
         description: The number of results per page.
         schema:
           type: string
-      x-codegen-request-body-name: listParams
+        x-codegen-param-name: pageSize
       responses:
         default:
           $ref: "#/components/responses/jsonResponse"
@@ -80,7 +137,6 @@ paths:
         description: Engine languager (null for universal).
         schema:
           type: string
-      x-codegen-request-body-name: engineData
       responses:
         default:
           $ref: "#/components/responses/jsonResponse"
@@ -102,9 +158,180 @@ paths:
       operationId: deleteEngine
       summary: Delete an engine by name.
       externalDocs:
-        url: https://swiftype.com/documentation/app-search/api/engines#delete
+        url: https://swiftype.com/documentation/site-search/engines#destroy
       tags:
       - Engine API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: createDocumentType
+      summary: Create a new document type in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#add-documenttype
+      tags:
+      - Document API
+      parameters:
+      - name: document_type.name
+        in: query
+        required: true
+        description: Document type name.
+        schema:
+          type: string
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+    get:
+      operationId: listDocumentTypes
+      summary: List all document types for an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#documenttypes-all
+      tags:
+      - Document API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    get:
+      operationId: getDocumentType
+      summary: Get a document type by id.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#documenttypes-single
+      tags:
+      - Document API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+    delete:
+      operationId: deleteDocumentType
+      summary: Delete a document type by id.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#documenttypes-delete
+      tags:
+      - Document API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: createDocument
+      summary: Create a new document in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#add-document
+      tags:
+      - Document API
+      parameters:
+      - name: document.external_id
+        in: query
+        required: true
+        description: Document external id.
+        schema:
+          $ref: "#/components/schemas/documentExternalId"
+      - name: document.fields
+        in: query
+        required: true
+        description: Document fields.
+        schema:
+          $ref: "#/components/schemas/documentFieldList"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+    get:
+      operationId: listDocuments
+      summary: List all documents in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#document-all
+      tags:
+      - Document API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents/create_or_update.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: createOrUpdateDocument
+      summary: Create or update a document in an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#add-document
+      tags:
+      - Document API
+      parameters:
+      - name: document.external_id
+        in: query
+        required: true
+        description: Document external id.
+        schema:
+          $ref: "#/components/schemas/documentExternalId"
+      - name: document.fields
+        in: query
+        required: true
+        description: Document fields.
+        schema:
+          $ref: "#/components/schemas/documentFieldList"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents/{external_id}.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    - $ref: "#/components/parameters/documentExternalId"
+    get:
+      operationId: getDocument
+      summary: Retrieve a document from the engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#document-single
+      tags:
+      - Document API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+    delete:
+      operationId: deleteDocument
+      summary: Delete a document from the engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#delete-external-id
+      tags:
+      - Document API
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/documents/{external_id}/update_fields.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    - $ref: "#/components/parameters/documentExternalId"
+    put:
+      operationId: updateDocumentFields
+      summary: Update fields of a document.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/indexing#updating_fields
+      tags:
+      - Document API
+      parameters:
+      - name: fields
+        in: query
+        required: true
+        description: Updated fields.
+        schema:
+          $ref: "#/components/schemas/documentFieldsUpdate"
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"

@@ -688,3 +688,21 @@ paths:
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/suggest.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: suggest
+      summary: Run an autocomplete search request accross an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/autocomplete
+      tags:
+      - Autocomplete API
+      parameters:
+      - $ref: "#/components/parameters/searchQueryText"
+      requestBody:
+        $ref: "#/components/requestBodies/searchRequestParams"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"

@@ -496,6 +496,31 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
+     * Run an autocomplete search request accross an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/autocomplete
+     *
+     * @param string $engineName          Name of the engine.
+     * @param string $queryText           Document external id.
+     * @param array  $searchRequestParams Search request parameters.
+     *
+     * @return array
+     */
+    public function suggest($engineName, $queryText, $searchRequestParams = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'q' => $queryText,
+        ];
+
+        $endpoint = $this->getEndpoint('Suggest');
+        $endpoint->setParams($params);
+        $endpoint->setBody($searchRequestParams);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Update fields of a document.
      *
      * Documentation: https://swiftype.com/documentation/site-search/indexing#updating_fields

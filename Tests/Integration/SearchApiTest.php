@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Tests\Integration;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class ClientApiTest extends AbstractClientTestCase
+class SearchApiTest extends AbstractClientTestCase
 {
     /**
      * Test the search API with simple searches and pagination.
@@ -32,31 +32,26 @@ class ClientApiTest extends AbstractClientTestCase
      */
     public function testSimpleSearch($docType, $queryText, $currentPage = null, $pageSize = null)
     {
-        $client = $this->getDefaultClient();
-        $engine = $this->getDefaultEngineName();
-
         $searchParams = ['per_page' => $pageSize, 'page' => $currentPage, 'document_types' => [$docType]];
 
-        $searchResponse = $client->search($engine, $queryText, $searchParams);
+        $searchResponse = $this->search($queryText, $searchParams);
 
         $this->assertEmpty($searchResponse['errors']);
         $this->assertArrayHasKey('info', $searchResponse);
         $this->assertArrayHasKey($docType, $searchResponse['info']);
-        $this->assertEquals($queryText, $searchResponse['info'][$docType]['query']);
+        $searchResponseInfo = $searchResponse['info'][$docType];
+
+        $this->assertEquals($queryText, $searchResponseInfo['query']);
 
         if ($pageSize) {
-            $this->assertEquals($pageSize, $searchResponse['info'][$docType]['per_page']);
+            $this->assertEquals($pageSize, $searchResponseInfo['per_page']);
         }
 
         if ($currentPage) {
-            $this->assertEquals($currentPage, $searchResponse['info'][$docType]['current_page']);
+            $this->assertEquals($currentPage, $searchResponseInfo['current_page']);
         }
 
-        $expectedRecords = min(
-            $searchResponse['info'][$docType]['per_page'],
-            $searchResponse['info'][$docType]['total_result_count']
-        );
-
+        $expectedRecords = min($searchResponseInfo['per_page'], $searchResponseInfo['total_result_count']);
         $this->assertArrayHasKey('records', $searchResponse);
         $this->assertArrayHasKey($docType, $searchResponse['records']);
         $this->assertCount($expectedRecords, $searchResponse['records'][$docType]);
@@ -67,12 +62,9 @@ class ClientApiTest extends AbstractClientTestCase
      */
     public function testBoostedSearch()
     {
-        $client = $this->getDefaultClient();
-        $engine = $this->getDefaultEngineName();
-
         $searchParams = ['functional_boosts' => ['page' => ['votes' => 'logarithmic']]];
 
-        $searchResponse = $client->search($engine, 'search engine', $searchParams);
+        $searchResponse = $this->search('search engine', $searchParams);
 
         $this->assertEmpty($searchResponse['errors']);
     }
@@ -88,12 +80,9 @@ class ClientApiTest extends AbstractClientTestCase
      */
     public function testSortedSearch($sortField, $sortDirection = 'asc')
     {
-        $client = $this->getDefaultClient();
-        $engine = $this->getDefaultEngineName();
-
         $searchParams = ['sort_field' => ['page' => $sortField], 'sort_direction' => ['page' => $sortDirection]];
 
-        $searchResponse = $client->search($engine, 'search engine', $searchParams);
+        $searchResponse = $this->search('search engine', $searchParams);
 
         $this->assertEmpty($searchResponse['errors']);
     }
@@ -108,12 +97,9 @@ class ClientApiTest extends AbstractClientTestCase
      */
     public function testFacetedSearch($facetField)
     {
-        $client = $this->getDefaultClient();
-        $engine = $this->getDefaultEngineName();
-
         $searchParams = ['facets' => ['page' => [$facetField]]];
 
-        $searchResponse = $client->search($engine, 'search engine', $searchParams);
+        $searchResponse = $this->search('search engine', $searchParams);
 
         $this->assertEmpty($searchResponse['errors']);
         $this->assertNotEmpty($searchResponse['info']['page']['facets'][$facetField]);
@@ -123,11 +109,27 @@ class ClientApiTest extends AbstractClientTestCase
         foreach ($filterValues as $filterValue => $docCount) {
             $filteredSearchParams = ['filters' => ['page' => [$facetField => $filterValue]]];
 
-            $filteredSearchResponse = $client->search($engine, 'search engine', $filteredSearchParams);
+            $filteredSearchResponse = $this->search('search engine', $filteredSearchParams);
 
             $this->assertEmpty($filteredSearchResponse['errors']);
             $this->assertEquals($docCount, $filteredSearchResponse['info']['page']['total_result_count']);
         }
+    }
+
+    /**
+     * Run the search query.
+     *
+     * @param string     $queryText
+     * @param array|null $searchParams
+     *
+     * @return array
+     */
+    protected function search($queryText, $searchParams = null)
+    {
+        $client = $this->getDefaultClient();
+        $engine = $this->getDefaultEngineName();
+
+        return $client->search($engine, $queryText, $searchParams);
     }
 
     /**

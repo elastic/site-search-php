@@ -21,7 +21,7 @@ class BulkUpdateDocuments extends \Swiftype\Endpoint\AbstractEndpoint
     /**
      * @var string
      */
-    protected $method = 'POST';
+    protected $method = 'PUT';
 
     /**
      * @var string

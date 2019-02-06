@@ -400,7 +400,7 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     - $ref: "#/components/parameters/documentTypeId"
-    post:
+    put:
       operationId: bulkUpdateDocuments
       summary: Bulk update of documents in an engine.
       externalDocs:

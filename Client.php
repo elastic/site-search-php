@@ -20,6 +20,131 @@ class Client extends \Swiftype\AbstractClient
     // phpcs:disable
 
     /**
+     * Async bulk creation or update of documents in an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#bulk_indexing
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param array  $documents      List of documents to index.
+     *
+     * @return array
+     */
+    public function asyncBulkCreateOrUpdateDocuments($engineName, $documentTypeId, $documents)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'documents' => $documents,
+        ];
+
+        $endpoint = $this->getEndpoint('AsyncBulkCreateOrUpdateDocuments');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Bulk creation of documents in an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#bulk_create
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param array  $documents      List of documents to create.
+     *
+     * @return array
+     */
+    public function bulkCreateDocuments($engineName, $documentTypeId, $documents)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'documents' => $documents,
+        ];
+
+        $endpoint = $this->getEndpoint('BulkCreateDocuments');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Bulk creation or update of documents in an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param array  $documents      List of documents to index.
+     *
+     * @return array
+     */
+    public function bulkCreateOrUpdateDocuments($engineName, $documentTypeId, $documents)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'documents' => $documents,
+        ];
+
+        $endpoint = $this->getEndpoint('BulkCreateOrUpdateDocuments');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Bulk delete of documents in an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#bulk_destroy
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param array  $documents      List of deleted documents external ids.
+     *
+     * @return array
+     */
+    public function bulkDeleteDocuments($engineName, $documentTypeId, $documents)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'documents' => $documents,
+        ];
+
+        $endpoint = $this->getEndpoint('BulkDeleteDocuments');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Bulk update of documents in an engine.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#bulk_update
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param array  $documents      List of documents to update.
+     *
+     * @return array
+     */
+    public function bulkUpdateDocuments($engineName, $documentTypeId, $documents)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'documents' => $documents,
+        ];
+
+        $endpoint = $this->getEndpoint('BulkUpdateDocuments');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Create a new document in an engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/indexing#add-document
@@ -208,6 +333,27 @@ class Client extends \Swiftype\AbstractClient
         ];
 
         $endpoint = $this->getEndpoint('GetDocument');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Check the status of document receipts issued by aync bulk indexing.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose
+     *
+     * @param array $receiptIds List of ids of documents receipts to check.
+     *
+     * @return array
+     */
+    public function getDocumentReceipts($receiptIds)
+    {
+        $params = [
+            'ids' => $receiptIds,
+        ];
+
+        $endpoint = $this->getEndpoint('GetDocumentReceipts');
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

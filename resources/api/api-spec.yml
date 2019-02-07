@@ -757,8 +757,26 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getSearchCountAnalytics
+      operationId: getEngineSearchCountAnalytics
       summary: Get the number of searches per day for an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#searches
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/analytics/searches.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: getDocumentTypeSearchCountAnalytics
+      summary: Get the number of searches per day for an document type.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#searches
       tags:
@@ -774,8 +792,28 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getTopQueriesAnalytics
-      summary: Retrieve top queries and usage count over a period.
+      operationId: getEngineTopQueriesAnalytics
+      summary: Retrieve top queries and usage count over a period for an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#top_queries
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      - $ref: "#/components/parameters/currentPage"
+      - $ref: "#/components/parameters/pageSize"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/analytics/top_queries.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: getDocumentTypeTopQueriesAnalytics
+      summary: Retrieve top queries and usage count over a period for a document type.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#top_queries
       tags:
@@ -793,8 +831,28 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getTopNoResultQueriesAnalytics
-      summary: Retrieve top queries with no result and usage count over a period.
+      operationId: getEngineTopNoResultQueriesAnalytics
+      summary: Retrieve top queries with no result and usage count over a period for an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#top_no_result_queries
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      - $ref: "#/components/parameters/currentPage"
+      - $ref: "#/components/parameters/pageSize"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/analytics/top_no_result_queries.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: getDocumentTypeTopNoResultQueriesAnalytics
+      summary: Retrieve top queries with no result and usage count over a period for a document type.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#top_no_result_queries
       tags:
@@ -812,8 +870,26 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getClicksCountAnalytics
-      summary: Retrieve number of clicks per day over a period.
+      operationId: getEngineClicksCountAnalytics
+      summary: Retrieve number of clicks per day over a period for an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#clicks
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/analytics/clicks.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: getDocumentTypeClicksCountAnalytics
+      summary: Retrieve number of clicks per day over a period for a document type.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#clicks
       tags:
@@ -829,8 +905,26 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getAutoselectsCountAnalytics
-      summary: Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
+      operationId: getEngineAutoselectsCountAnalytics
+      summary: Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period for an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#autoselects
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/analytics/autoselects.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: getDocumentTypeAutoselectsCountAnalytics
+      summary: Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period for a document type.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#autoselects
       tags:

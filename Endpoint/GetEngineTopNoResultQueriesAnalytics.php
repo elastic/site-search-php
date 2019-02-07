@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class GetAutoselectsCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
+class GetEngineTopNoResultQueriesAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
@@ -26,10 +26,10 @@ class GetAutoselectsCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
     /**
      * @var string
      */
-    protected $uri = '/engines/{engine_name}/analytics/autoselects.json';
+    protected $uri = '/engines/{engine_name}/analytics/top_no_result_queries.json';
 
     protected $routeParams = ['engine_name'];
 
-    protected $paramWhitelist = ['start_date', 'end_date'];
+    protected $paramWhitelist = ['start_date', 'end_date', 'page', 'per_page'];
     // phpcs:enable
 }

@@ -383,6 +383,149 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
+     * Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period for a document type.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#autoselects
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param string $startDate      The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate        The last date from which to capture searches. Defaults to current date.
+     *
+     * @return array
+     */
+    public function getDocumentTypeAutoselectsCountAnalytics($engineName, $documentTypeId, $startDate = null, $endDate = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ];
+
+        $endpoint = $this->getEndpoint('GetDocumentTypeAutoselectsCountAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Retrieve number of clicks per day over a period for a document type.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#clicks
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param string $startDate      The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate        The last date from which to capture searches. Defaults to current date.
+     *
+     * @return array
+     */
+    public function getDocumentTypeClicksCountAnalytics($engineName, $documentTypeId, $startDate = null, $endDate = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ];
+
+        $endpoint = $this->getEndpoint('GetDocumentTypeClicksCountAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Get the number of searches per day for an document type.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#searches
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param string $startDate      The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate        The last date from which to capture searches. Defaults to current date.
+     *
+     * @return array
+     */
+    public function getDocumentTypeSearchCountAnalytics($engineName, $documentTypeId, $startDate = null, $endDate = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ];
+
+        $endpoint = $this->getEndpoint('GetDocumentTypeSearchCountAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Retrieve top queries with no result and usage count over a period for a document type.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#top_no_result_queries
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param string $startDate      The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate        The last date from which to capture searches. Defaults to current date.
+     * @param string $currentPage    The page to fetch. Defaults to 1.
+     * @param string $pageSize       The number of results per page.
+     *
+     * @return array
+     */
+    public function getDocumentTypeTopNoResultQueriesAnalytics($engineName, $documentTypeId, $startDate = null, $endDate = null, $currentPage = null, $pageSize = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'page' => $currentPage,
+            'per_page' => $pageSize,
+        ];
+
+        $endpoint = $this->getEndpoint('GetDocumentTypeTopNoResultQueriesAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Retrieve top queries and usage count over a period for a document type.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#top_queries
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param string $startDate      The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate        The last date from which to capture searches. Defaults to current date.
+     * @param string $currentPage    The page to fetch. Defaults to 1.
+     * @param string $pageSize       The number of results per page.
+     *
+     * @return array
+     */
+    public function getDocumentTypeTopQueriesAnalytics($engineName, $documentTypeId, $startDate = null, $endDate = null, $currentPage = null, $pageSize = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'page' => $currentPage,
+            'per_page' => $pageSize,
+        ];
+
+        $endpoint = $this->getEndpoint('GetDocumentTypeTopQueriesAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Retrieves an engine by name.
      *
      * Documentation: https://swiftype.com/documentation/site-search/engines#one-engine
@@ -404,7 +547,7 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
-     * Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
+     * Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period for an engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/analytics#autoselects
      *
@@ -429,7 +572,7 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
-     * Retrieve number of clicks per day over a period.
+     * Retrieve number of clicks per day over a period for an engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/analytics#clicks
      *
@@ -479,7 +622,7 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
-     * Retrieve top queries with no result and usage count over a period.
+     * Retrieve top queries with no result and usage count over a period for an engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/analytics#top_no_result_queries
      *
@@ -508,7 +651,7 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
-     * Retrieve top queries and usage count over a period.
+     * Retrieve top queries and usage count over a period for an engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/analytics#top_queries
      *

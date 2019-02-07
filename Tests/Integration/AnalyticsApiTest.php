@@ -55,6 +55,43 @@ class AnalyticsApiTest extends AbstractClientTestCase
     }
 
     /**
+     * Test count method for Document Types Analytics API.
+     *
+     * @param string $method
+     *
+     * @testWith ["getDocumentTypeSearchCountAnalytics"]
+     *           ["getDocumentTypeClicksCountAnalytics"]
+     *           ["getDocumentTypeAutoselectsCountAnalytics"]
+     */
+    public function testDocumentTypeAnalyticsCountMethod($method)
+    {
+        $counts = self::getDefaultClient()->$method(self::getDefaultEngineName(), 'page');
+
+        foreach ($counts as list($date, $count)) {
+            $this->assertNotFalse(\DateTime::createFromFormat('Y-m-d', $date));
+            $this->assertInternalType('int', $count);
+        }
+    }
+
+    /**
+     * Test top queries method for Document Types Analytics API.
+     *
+     * @param string $method
+     *
+     * @testWith ["getDocumentTypeTopQueriesAnalytics"]
+     *           ["getDocumentTypeTopNoResultQueriesAnalytics"]
+     */
+    public function testDocumentTypeAnalyticsTopQueriesMethod($method)
+    {
+        $topQueries = self::getDefaultClient()->$method(self::getDefaultEngineName(), 'page');
+
+        foreach ($topQueries as list($queryText, $count)) {
+            $this->assertInternalType('string', $queryText);
+            $this->assertInternalType('int', $count);
+        }
+    }
+
+    /**
      * Test calling the log clickthrough API.
      */
     public function testLogClickthrough()

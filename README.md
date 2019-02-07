@@ -17,6 +17,8 @@
 
 ## Getting started 🐣
 
+Using this client assumes that you have already created an Site Search account on https://swiftype.com/.
+
 You can install the client in your project by using composer:
 
 ```bash

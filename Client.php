@@ -316,6 +316,8 @@ class Client extends \Swiftype\AbstractClient
     /**
      * Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
      *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#autoselects
+     *
      * @param string $engineName Name of the engine.
      * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
      * @param string $endDate    The last date from which to capture searches. Defaults to current date.
@@ -338,6 +340,8 @@ class Client extends \Swiftype\AbstractClient
 
     /**
      * Retrieve number of clicks per day over a period.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#clicks
      *
      * @param string $engineName Name of the engine.
      * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
@@ -452,6 +456,8 @@ class Client extends \Swiftype\AbstractClient
     /**
      * Get the number of searches per day for an engine.
      *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#searches
+     *
      * @param string $engineName Name of the engine.
      * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
      * @param string $endDate    The last date from which to capture searches. Defaults to current date.
@@ -474,6 +480,8 @@ class Client extends \Swiftype\AbstractClient
 
     /**
      * Retrieve top queries with no result and usage count over a period.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#top_no_result_queries
      *
      * @param string $engineName  Name of the engine.
      * @param string $startDate   The first day from which to capture searches. Defaults to 2 weeks.
@@ -501,6 +509,8 @@ class Client extends \Swiftype\AbstractClient
 
     /**
      * Retrieve top queries and usage count over a period.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#top_queries
      *
      * @param string $engineName  Name of the engine.
      * @param string $startDate   The first day from which to capture searches. Defaults to 2 weeks.
@@ -595,6 +605,8 @@ class Client extends \Swiftype\AbstractClient
 
     /**
      * Record a clickthrough for a particular result.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#recording_clickthroughs
      *
      * @param string $engineName     Name of the engine.
      * @param string $documentTypeId Document type id.

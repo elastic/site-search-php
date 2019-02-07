@@ -736,6 +736,8 @@ paths:
     post:
       operationId: logClickthrough
       summary: Record a clickthrough for a particular result.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#recording_clickthroughs
       tags:
       - Analytics API
       parameters:
@@ -757,6 +759,8 @@ paths:
     post:
       operationId: getSearchCountAnalytics
       summary: Get the number of searches per day for an engine.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#searches
       tags:
       - Analytics API
       parameters:
@@ -772,6 +776,8 @@ paths:
     post:
       operationId: getTopQueriesAnalytics
       summary: Retrieve top queries and usage count over a period.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#top_queries
       tags:
       - Analytics API
       parameters:
@@ -789,6 +795,8 @@ paths:
     post:
       operationId: getTopNoResultQueriesAnalytics
       summary: Retrieve top queries with no result and usage count over a period.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#top_no_result_queries
       tags:
       - Analytics API
       parameters:
@@ -806,6 +814,8 @@ paths:
     post:
       operationId: getClicksCountAnalytics
       summary: Retrieve number of clicks per day over a period.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#clicks
       tags:
       - Analytics API
       parameters:
@@ -821,6 +831,8 @@ paths:
     post:
       operationId: getAutoselectsCountAnalytics
       summary: Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
+      externalDocs:
+        url: https://swiftype.com/documentation/site-search/analytics#autoselects
       tags:
       - Analytics API
       parameters:

@@ -314,6 +314,52 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
+     * Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
+     *
+     * @param string $engineName Name of the engine.
+     * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate    The last date from which to capture searches. Defaults to current date.
+     *
+     * @return array
+     */
+    public function getAutoselectsCountAnalytics($engineName, $startDate = null, $endDate = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ];
+
+        $endpoint = $this->getEndpoint('GetAutoselectsCountAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Retrieve number of clicks per day over a period.
+     *
+     * @param string $engineName Name of the engine.
+     * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate    The last date from which to capture searches. Defaults to current date.
+     *
+     * @return array
+     */
+    public function getClicksCountAnalytics($engineName, $startDate = null, $endDate = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ];
+
+        $endpoint = $this->getEndpoint('GetClicksCountAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Retrieve a document from the engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/indexing#document-single
@@ -404,6 +450,83 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
+     * Get the number of searches per day for an engine.
+     *
+     * @param string $engineName Name of the engine.
+     * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate    The last date from which to capture searches. Defaults to current date.
+     *
+     * @return array
+     */
+    public function getSearchCountAnalytics($engineName, $startDate = null, $endDate = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ];
+
+        $endpoint = $this->getEndpoint('GetSearchCountAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Retrieve top queries with no result and usage count over a period.
+     *
+     * @param string $engineName  Name of the engine.
+     * @param string $startDate   The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate     The last date from which to capture searches. Defaults to current date.
+     * @param string $currentPage The page to fetch. Defaults to 1.
+     * @param string $pageSize    The number of results per page.
+     *
+     * @return array
+     */
+    public function getTopNoResultQueriesAnalytics($engineName, $startDate = null, $endDate = null, $currentPage = null, $pageSize = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'page' => $currentPage,
+            'per_page' => $pageSize,
+        ];
+
+        $endpoint = $this->getEndpoint('GetTopNoResultQueriesAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Retrieve top queries and usage count over a period.
+     *
+     * @param string $engineName  Name of the engine.
+     * @param string $startDate   The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate     The last date from which to capture searches. Defaults to current date.
+     * @param string $currentPage The page to fetch. Defaults to 1.
+     * @param string $pageSize    The number of results per page.
+     *
+     * @return array
+     */
+    public function getTopQueriesAnalytics($engineName, $startDate = null, $endDate = null, $currentPage = null, $pageSize = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'page' => $currentPage,
+            'per_page' => $pageSize,
+        ];
+
+        $endpoint = $this->getEndpoint('GetTopQueriesAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * List all document types for an engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/indexing#documenttypes-all
@@ -465,6 +588,31 @@ class Client extends \Swiftype\AbstractClient
         ];
 
         $endpoint = $this->getEndpoint('ListEngines');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Record a clickthrough for a particular result.
+     *
+     * @param string $engineName     Name of the engine.
+     * @param string $documentTypeId Document type id.
+     * @param string $documentId     The external_id or id of the document clicked by the user.
+     * @param string $queryText      Search query text.
+     *
+     * @return array
+     */
+    public function logClickthrough($engineName, $documentTypeId, $documentId, $queryText)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'document_type_id' => $documentTypeId,
+            'id' => $documentId,
+            'q' => $queryText,
+        ];
+
+        $endpoint = $this->getEndpoint('LogClickthrough');
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

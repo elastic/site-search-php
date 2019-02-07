@@ -75,12 +75,12 @@ class BulkDocumentApiTest extends AbstractEngineTestCase
 
         $bulkResponse = $client->asyncBulkCreateOrUpdateDocuments($engine, $typeId, $documents);
         $this->assertCount(count($documents), $bulkResponse);
-        $receiptIds = array_column($bulkResponse, 'id');
+        $receiptIds = array_column($bulkResponse['document_receipts'], 'id');
 
         while (!empty($receiptIds)) {
-            $receiptIds = [];
             $receiptCheckResponse = $client->getDocumentReceipts($receiptIds);
-
+            $this->assertNotEmpty($receiptCheckResponse);
+            $receiptIds = [];
             foreach ($receiptCheckResponse as $receipt) {
                 if ('pending' != $receipt['status']) {
                     $receiptIds = $receipt['id'];

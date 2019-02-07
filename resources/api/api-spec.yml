@@ -276,6 +276,38 @@ components:
       schema:
         type: string
 
+    currentPage:
+      name: page
+      in: query
+      description: The page to fetch. Defaults to 1.
+      schema:
+        type: string
+      x-codegen-param-name: currentPage
+
+    pageSize:
+      name: per_page
+      in: query
+      description: The number of results per page.
+      schema:
+        type: string
+      x-codegen-param-name: pageSize
+
+    analyticsStartDate:
+      name: start_date
+      in: query
+      description: The first day from which to capture searches. Defaults to 2 weeks.
+      required: false
+      schema:
+        type: string
+
+    analyticsEndDate:
+      name: end_date
+      in: query
+      description: The last date from which to capture searches. Defaults to current date.
+      required: false
+      schema:
+        type: string
+
   # Reusable request definitions -----------------------------------------------
   requestBodies:
     searchRequestParams:
@@ -305,18 +337,8 @@ paths:
       tags:
       - Engine API
       parameters:
-      - name: page
-        in: query
-        description: The page to fetch. Defaults to 1.
-        schema:
-          type: string
-        x-codegen-param-name: currentPage
-      - name: per_page
-        in: query
-        description: The number of results per page.
-        schema:
-          type: string
-        x-codegen-param-name: pageSize
+      - $ref: "#/components/parameters/currentPage"
+      - $ref: "#/components/parameters/pageSize"
       responses:
         default:
           $ref: "#/components/responses/jsonResponse"
@@ -703,6 +725,107 @@ paths:
       - $ref: "#/components/parameters/searchQueryText"
       requestBody:
         $ref: "#/components/requestBodies/searchRequestParams"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/document_types/{document_type_id}/analytics/log_clickthrough.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    - $ref: "#/components/parameters/documentTypeId"
+    post:
+      operationId: logClickthrough
+      summary: Record a clickthrough for a particular result.
+      tags:
+      - Analytics API
+      parameters:
+      - name: id
+        in: query
+        x-codegen-param-name: documentId
+        description: The external_id or id of the document clicked by the user.
+        required: true
+        schema:
+          $ref: "#/components/schemas/documentExternalId"
+      - $ref: "#/components/parameters/searchQueryText"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/analytics/searches.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: getSearchCountAnalytics
+      summary: Get the number of searches per day for an engine.
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/analytics/top_queries.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: getTopQueriesAnalytics
+      summary: Retrieve top queries and usage count over a period.
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      - $ref: "#/components/parameters/currentPage"
+      - $ref: "#/components/parameters/pageSize"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/analytics/top_no_result_queries.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: getTopNoResultQueriesAnalytics
+      summary: Retrieve top queries with no result and usage count over a period.
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      - $ref: "#/components/parameters/currentPage"
+      - $ref: "#/components/parameters/pageSize"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/analytics/clicks.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: getClicksCountAnalytics
+      summary: Retrieve number of clicks per day over a period.
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
+      responses:
+        default:
+          $ref: "#/components/responseBodies/jsonResponse"
+
+  /engines/{engine_name}/analytics/autoselects.json:
+    parameters:
+    - $ref: "#/components/parameters/engineNameParam"
+    post:
+      operationId: getAutoselectsCountAnalytics
+      summary: Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
+      tags:
+      - Analytics API
+      parameters:
+      - $ref: "#/components/parameters/analyticsStartDate"
+      - $ref: "#/components/parameters/analyticsEndDate"
       responses:
         default:
           $ref: "#/components/responseBodies/jsonResponse"

@@ -21,9 +21,9 @@ To instantiate a new client you can use `\Swiftype\SiteSearch\ClientBuilder`:
 
 - The Site Search PHP client does not support authentication through Engine Key as described in the [documentation](https://swiftype.com/documentation/site-search/overview#authentication).
 
-#### Basic usage
+### Basic usage
 
-##### Retrieve or create an engine
+#### Retrieve or create an engine
 
 Most methods of the API require that you have access to an Engine.
 
@@ -42,7 +42,7 @@ If the Engine does not exists yet, you can create it by using the `Client::creat
 The second parameter (`$language`) is optional or can be set to null. Then the Engine will be created using the `universal` language.
 The list of supported language is available here : https://swiftype.com/documentation/site-search/overview#language-optimization
 
-##### Document types
+#### Document types
 
 When using Site Search every document has an associated document type.
 
@@ -58,7 +58,7 @@ In order to index documentsn you need to create at least one document type in yp
   $documentType = $client->createDocumentType('my-engine', 'my-document-type');
 ```
 
-##### Index some documents
+#### Index some documents
 
 In order to index some documents in the Engine you can use the `Client::bulkCreateOrUpdateDocuments` method:
 
@@ -91,7 +91,7 @@ In order to index some documents in the Engine you can use the `Client::bulkCrea
 
 - Full documentation for the endpoint and other method available to index documents is available here : https://swiftype.com/documentation/site-search/indexing.
 
-##### Search
+#### Search
 
 In order to search in your Engine you can use the `Client::search` method :
 

@@ -27,6 +27,27 @@ composer require swiftype/swiftype-site-search-php
 
 ## Usage
 
+### Configuring the client
+
+#### Basic client instantiation
+
+To instantiate a new client you can use `\Swiftype\SiteSearch\ClientBuilder`:
+
+```php
+  $apiKey        = 'XXXXXXXXXXXX';
+  $clientBuilder = \Swiftype\SiteSearch\ClientBuilder::create($apiKey);
+
+  $client = $clientBuilder->build();
+```
+
+**Notes:**
+
+- The resulting client will be of type `\Swiftype\SiteSearch\Client`
+
+- You can find the API endpoint and your API key URL in your Site Search account: https://app.swiftype.com/settings/account.
+
+- The Site Search PHP client does not support authentication through Engine Key as described in the [documentation](https://swiftype.com/documentation/site-search/overview#authentication).
+
 ### Clients methods
 
 Method      | Description | Documentation

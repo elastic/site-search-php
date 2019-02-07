@@ -17,6 +17,8 @@
 
 ## Getting started 🐣
 
+Using this client assumes that you have already created an Site Search account on https://swiftype.com/.
+
 You can install the client in your project by using composer:
 
 ```bash
@@ -25,38 +27,159 @@ composer require swiftype/swiftype-site-search-php
 
 ## Usage
 
+### Configuring the client
+
+#### Basic client instantiation
+
+To instantiate a new client you can use `\Swiftype\SiteSearch\ClientBuilder`:
+
+```php
+  $apiKey        = 'XXXXXXXXXXXX';
+  $clientBuilder = \Swiftype\SiteSearch\ClientBuilder::create($apiKey);
+
+  $client = $clientBuilder->build();
+```
+
+**Notes:**
+
+- The resulting client will be of type `\Swiftype\SiteSearch\Client`
+
+- You can find the API endpoint and your API key URL in your Site Search account: https://app.swiftype.com/settings/account.
+
+- The Site Search PHP client does not support authentication through Engine Key as described in the [documentation](https://swiftype.com/documentation/site-search/overview#authentication).
+
+### Basic usage
+
+#### Retrieve or create an engine
+
+Most methods of the API require that you have access to an Engine.
+
+To check if an Engine exists and retrieve its configuration, you can use the `Client::getEngine` method :
+
+```php
+  $engine = $client->getEngine('my-engine');
+```
+
+If the Engine does not exists yet, you can create it by using the `Client::createEngine` method :
+
+```php
+  $engine = $client->createEngine('my-engine', 'en');
+```
+
+The second parameter (`$language`) is optional or can be set to null. Then the Engine will be created using the `universal` language.
+The list of supported language is available here : https://swiftype.com/documentation/site-search/overview#language-optimization
+
+#### Document types
+
+When using Site Search every document has an associated document type.
+
+You can list available document types in an engine by using the `Client::listDocumentTypes` method:
+
+```php
+  $documentTypes = $client->listDocumentTypes('my-engine');
+```
+
+In order to index documentsn you need to create at least one document type in ypur engine. This can be done by using the Client::createDocumentType` method:
+
+```
+  $documentType = $client->createDocumentType('my-engine', 'my-document-type');
+```
+
+#### Index some documents
+
+In order to index some documents in the Engine you can use the `Client::bulkCreateOrUpdateDocuments` method:
+
+```php
+    $documents = [
+      [
+        'external_id' => 'first-document',
+        'fields'      => [
+          ['name' => 'title', 'value' => 'First document title', 'type' => 'string'],
+          ['name' => 'content', 'value' => 'Text for the first document.', 'type' => 'string'],
+        ]
+      ],
+      [
+        'external_id' => 'other-document',
+        'fields'      => [
+          ['name' => 'title', 'value' => 'Other document title', 'type' => 'string'],
+          ['name' => 'content', 'value' => 'Text for the other document.', 'type' => 'string'],
+        ]
+      ],
+    ];
+
+    $indexingResults = $client->bulkCreateOrUpdateDocuments('my-engine', 'my-document-type', $documents);
+```
+
+**Notes:**
+
+- The `$indexingResults` array will contains the result of the indexation of each documents. You should always check the content of the result.
+
+- A full list of available field types and associated use cases is available here : https://swiftype.com/documentation/site-search/overview#fieldtype
+
+- Full documentation for the endpoint and other method available to index documents is available here : https://swiftype.com/documentation/site-search/indexing.
+
+#### Search
+
+In order to search in your Engine you can use the `Client::search` method :
+
+```php
+    $searchResponse = $client->search('my-engine', 'fulltext search query');
+```
+
+An optional `$searchRequestParams` can be used to pass additional parameters to the Search API endpoint (pagination, filters, facets, ...):
+
+```php
+    $searchParams = ['per_page' => 10, 'page' => 2];
+    $searchResponse = $client->search('my-engine', 'fulltext search query', $searchParams);
+```
+
+Allowed params are :
+
+Param name                        | Description                             | Documentation URL
+----------------------------------|-----------------------------------------|--------------------------------------------------------------------------
+`per_page` and `page`             | Control pagination.                     | https://swiftype.com/documentation/site-search/searching/pagination
+`document_types`                  | Searched document types.                | https://swiftype.com/documentation/site-search/searching/documenttypes
+`filters`                         | Search filters                          | https://swiftype.com/documentation/site-search/searching/field-weights
+`facets`                          | Search facets.                          | https://swiftype.com/documentation/site-search/searching/faceting
+`boosts`                          | Search boosts.                          | https://swiftype.com/documentation/site-search/searching/boosting
+`fetch_fields`                    | Fields returned by the search.          | https://swiftype.com/documentation/site-search/searching/fetch-fields
+`search_fields`                   | Field (weighted) used by the search.    | https://swiftype.com/documentation/site-search/searching/field-weights
+`highlight_fields`                | Field highlighting configuration.       | https://swiftype.com/documentation/site-search/searching/highlight-fields
+`sort_field` and `sort_direction` | Result sort order configuration         | https://swiftype.com/documentation/site-search/searching/sorting
+`spelling`                        | Control over the spellchecker behavior. | https://swiftype.com/documentation/site-search/searching/spelling
+
 ### Clients methods
 
-Method name |Parameters| Description
-------------|----------|------------
-`asyncBulkCreateOrUpdateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Async bulk creation or update of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_indexing)
-`bulkCreateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk creation of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create)
-`bulkCreateOrUpdateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk creation or update of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose)
-`bulkDeleteDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk delete of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_destroy)
-`bulkUpdateDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documents` (required)  | Bulk update of documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_update)
-`createDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documentExternalId` (required) <br /> - `$documentFields` (required)  | Create a new document in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
-`createDocumentType` | - `$engineName` (required) <br /> - `$documentTypeName` (required)  | Create a new document type in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-documenttype)
-`createEngine` | - `$engineName` (required) <br /> - `$engineLanguage` | Create a new API based engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#create)
-`createOrUpdateDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documentExternalId` (required) <br /> - `$documentFields` (required)  | Create or update a document in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
-`deleteDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$externalId` (required)  | Delete a document from the engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#delete-external-id)
-`deleteDocumentType` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | Delete a document type by id.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-delete)
-`deleteEngine` | - `$engineName` (required)  | Delete an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#destroy)
-`getAutoselectsCountAnalytics` | - `$engineName` (required) <br /> - `$startDate`<br /> - `$endDate` | Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
-`getClicksCountAnalytics` | - `$engineName` (required) <br /> - `$startDate`<br /> - `$endDate` | Retrieve number of clicks per day over a period.
-`getDocument` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$externalId` (required)  | Retrieve a document from the engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#document-single)
-`getDocumentReceipts` | - `$receiptIds` (required)  | Check the status of document receipts issued by aync bulk indexing.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose)
-`getDocumentType` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | Get a document type by id.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-single)
-`getEngine` | - `$engineName` (required)  | Retrieves an engine by name.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#one-engine)
-`getSearchCountAnalytics` | - `$engineName` (required) <br /> - `$startDate`<br /> - `$endDate` | Get the number of searches per day for an engine.
-`getTopNoResultQueriesAnalytics` | - `$engineName` (required) <br /> - `$startDate`<br /> - `$endDate`<br /> - `$currentPage`<br /> - `$pageSize` | Retrieve top queries with no result and usage count over a period.
-`getTopQueriesAnalytics` | - `$engineName` (required) <br /> - `$startDate`<br /> - `$endDate`<br /> - `$currentPage`<br /> - `$pageSize` | Retrieve top queries and usage count over a period.
-`listDocumentTypes` | - `$engineName` (required)  | List all document types for an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-all)
-`listDocuments` | - `$engineName` (required) <br /> - `$documentTypeId` (required)  | List all documents in an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#document-all)
-`listEngines` | - `$currentPage`<br /> - `$pageSize` | Retrieves all engines with optional pagination support.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#list)
-`logClickthrough` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$documentId` (required) <br /> - `$queryText` (required)  | Record a clickthrough for a particular result.
-`search` | - `$engineName` (required) <br /> - `$queryText` (required) <br /> - `$searchRequestParams` | Run a search request accross an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/searching)
-`suggest` | - `$engineName` (required) <br /> - `$queryText` (required) <br /> - `$searchRequestParams` | Run an autocomplete search request accross an engine.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/autocomplete)
-`updateDocumentFields` | - `$engineName` (required) <br /> - `$documentTypeId` (required) <br /> - `$externalId` (required) <br /> - `$fields` (required)  | Update fields of a document.<br />[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#updating_fields)
+Method      | Description | Documentation
+------------|-------------|--------------
+**`asyncBulkCreateOrUpdateDocuments`**| Async bulk creation or update of documents in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documents` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_indexing)
+**`bulkCreateDocuments`**| Bulk creation of documents in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documents` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create)
+**`bulkCreateOrUpdateDocuments`**| Bulk creation or update of documents in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documents` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose)
+**`bulkDeleteDocuments`**| Bulk delete of documents in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documents` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_destroy)
+**`bulkUpdateDocuments`**| Bulk update of documents in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documents` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_update)
+**`createDocument`**| Create a new document in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documentExternalId` (required) <br />   - `$documentFields` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
+**`createDocumentType`**| Create a new document type in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeName` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-documenttype)
+**`createEngine`**| Create a new API based engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$engineLanguage`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#create)
+**`createOrUpdateDocument`**| Create or update a document in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documentExternalId` (required) <br />   - `$documentFields` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
+**`deleteDocument`**| Delete a document from the engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$externalId` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#delete-external-id)
+**`deleteDocumentType`**| Delete a document type by id.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-delete)
+**`deleteEngine`**| Delete an engine by name.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#destroy)
+**`getAutoselectsCountAnalytics`**| Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$startDate`<br />   - `$endDate`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/analytics#autoselects)
+**`getClicksCountAnalytics`**| Retrieve number of clicks per day over a period.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$startDate`<br />   - `$endDate`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/analytics#clicks)
+**`getDocument`**| Retrieve a document from the engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$externalId` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#document-single)
+**`getDocumentReceipts`**| Check the status of document receipts issued by aync bulk indexing.<br/> <br/> **Parameters :** <br />  - `$receiptIds` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose)
+**`getDocumentType`**| Get a document type by id.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-single)
+**`getEngine`**| Retrieves an engine by name.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#one-engine)
+**`getSearchCountAnalytics`**| Get the number of searches per day for an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$startDate`<br />   - `$endDate`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/analytics#searches)
+**`getTopNoResultQueriesAnalytics`**| Retrieve top queries with no result and usage count over a period.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$startDate`<br />   - `$endDate`<br />   - `$currentPage`<br />   - `$pageSize`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/analytics#top_no_result_queries)
+**`getTopQueriesAnalytics`**| Retrieve top queries and usage count over a period.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$startDate`<br />   - `$endDate`<br />   - `$currentPage`<br />   - `$pageSize`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/analytics#top_queries)
+**`listDocumentTypes`**| List all document types for an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#documenttypes-all)
+**`listDocuments`**| List all documents in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#document-all)
+**`listEngines`**| Retrieves all engines with optional pagination support.<br/> <br/> **Parameters :** <br />  - `$currentPage`<br />   - `$pageSize`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#list)
+**`logClickthrough`**| Record a clickthrough for a particular result.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documentId` (required) <br />   - `$queryText` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/analytics#recording_clickthroughs)
+**`search`**| Run a search request accross an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$queryText` (required) <br />   - `$searchRequestParams`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/searching)
+**`suggest`**| Run an autocomplete search request accross an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$queryText` (required) <br />   - `$searchRequestParams`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/autocomplete)
+**`updateDocumentFields`**| Update fields of a document.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$externalId` (required) <br />   - `$fields` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#updating_fields)
 
 ## Development
 

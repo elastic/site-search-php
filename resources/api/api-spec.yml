@@ -757,7 +757,7 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getSearchCountAnalytics
+      operationId: getEngineSearchCountAnalytics
       summary: Get the number of searches per day for an engine.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#searches
@@ -774,7 +774,7 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getTopQueriesAnalytics
+      operationId: getEngineTopQueriesAnalytics
       summary: Retrieve top queries and usage count over a period.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#top_queries
@@ -793,7 +793,7 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getTopNoResultQueriesAnalytics
+      operationId: getEngineTopNoResultQueriesAnalytics
       summary: Retrieve top queries with no result and usage count over a period.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#top_no_result_queries
@@ -812,7 +812,7 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getClicksCountAnalytics
+      operationId: getEngineClicksCountAnalytics
       summary: Retrieve number of clicks per day over a period.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#clicks
@@ -829,7 +829,7 @@ paths:
     parameters:
     - $ref: "#/components/parameters/engineNameParam"
     post:
-      operationId: getAutoselectsCountAnalytics
+      operationId: getEngineAutoselectsCountAnalytics
       summary: Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/analytics#autoselects

@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class GetClicksCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
+class GetEngineClicksCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**

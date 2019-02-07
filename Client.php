@@ -314,56 +314,6 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
-     * Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
-     *
-     * Documentation: https://swiftype.com/documentation/site-search/analytics#autoselects
-     *
-     * @param string $engineName Name of the engine.
-     * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
-     * @param string $endDate    The last date from which to capture searches. Defaults to current date.
-     *
-     * @return array
-     */
-    public function getAutoselectsCountAnalytics($engineName, $startDate = null, $endDate = null)
-    {
-        $params = [
-            'engine_name' => $engineName,
-            'start_date' => $startDate,
-            'end_date' => $endDate,
-        ];
-
-        $endpoint = $this->getEndpoint('GetAutoselectsCountAnalytics');
-        $endpoint->setParams($params);
-
-        return $this->performRequest($endpoint);
-    }
-
-    /**
-     * Retrieve number of clicks per day over a period.
-     *
-     * Documentation: https://swiftype.com/documentation/site-search/analytics#clicks
-     *
-     * @param string $engineName Name of the engine.
-     * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
-     * @param string $endDate    The last date from which to capture searches. Defaults to current date.
-     *
-     * @return array
-     */
-    public function getClicksCountAnalytics($engineName, $startDate = null, $endDate = null)
-    {
-        $params = [
-            'engine_name' => $engineName,
-            'start_date' => $startDate,
-            'end_date' => $endDate,
-        ];
-
-        $endpoint = $this->getEndpoint('GetClicksCountAnalytics');
-        $endpoint->setParams($params);
-
-        return $this->performRequest($endpoint);
-    }
-
-    /**
      * Retrieve a document from the engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/indexing#document-single
@@ -454,6 +404,56 @@ class Client extends \Swiftype\AbstractClient
     }
 
     /**
+     * Retrieve number of autoselects (number of clicked results in the autocomplete) per day over a period.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#autoselects
+     *
+     * @param string $engineName Name of the engine.
+     * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate    The last date from which to capture searches. Defaults to current date.
+     *
+     * @return array
+     */
+    public function getEngineAutoselectsCountAnalytics($engineName, $startDate = null, $endDate = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ];
+
+        $endpoint = $this->getEndpoint('GetEngineAutoselectsCountAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Retrieve number of clicks per day over a period.
+     *
+     * Documentation: https://swiftype.com/documentation/site-search/analytics#clicks
+     *
+     * @param string $engineName Name of the engine.
+     * @param string $startDate  The first day from which to capture searches. Defaults to 2 weeks.
+     * @param string $endDate    The last date from which to capture searches. Defaults to current date.
+     *
+     * @return array
+     */
+    public function getEngineClicksCountAnalytics($engineName, $startDate = null, $endDate = null)
+    {
+        $params = [
+            'engine_name' => $engineName,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ];
+
+        $endpoint = $this->getEndpoint('GetEngineClicksCountAnalytics');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Get the number of searches per day for an engine.
      *
      * Documentation: https://swiftype.com/documentation/site-search/analytics#searches
@@ -464,7 +464,7 @@ class Client extends \Swiftype\AbstractClient
      *
      * @return array
      */
-    public function getSearchCountAnalytics($engineName, $startDate = null, $endDate = null)
+    public function getEngineSearchCountAnalytics($engineName, $startDate = null, $endDate = null)
     {
         $params = [
             'engine_name' => $engineName,
@@ -472,7 +472,7 @@ class Client extends \Swiftype\AbstractClient
             'end_date' => $endDate,
         ];
 
-        $endpoint = $this->getEndpoint('GetSearchCountAnalytics');
+        $endpoint = $this->getEndpoint('GetEngineSearchCountAnalytics');
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -491,7 +491,7 @@ class Client extends \Swiftype\AbstractClient
      *
      * @return array
      */
-    public function getTopNoResultQueriesAnalytics($engineName, $startDate = null, $endDate = null, $currentPage = null, $pageSize = null)
+    public function getEngineTopNoResultQueriesAnalytics($engineName, $startDate = null, $endDate = null, $currentPage = null, $pageSize = null)
     {
         $params = [
             'engine_name' => $engineName,
@@ -501,7 +501,7 @@ class Client extends \Swiftype\AbstractClient
             'per_page' => $pageSize,
         ];
 
-        $endpoint = $this->getEndpoint('GetTopNoResultQueriesAnalytics');
+        $endpoint = $this->getEndpoint('GetEngineTopNoResultQueriesAnalytics');
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -520,7 +520,7 @@ class Client extends \Swiftype\AbstractClient
      *
      * @return array
      */
-    public function getTopQueriesAnalytics($engineName, $startDate = null, $endDate = null, $currentPage = null, $pageSize = null)
+    public function getEngineTopQueriesAnalytics($engineName, $startDate = null, $endDate = null, $currentPage = null, $pageSize = null)
     {
         $params = [
             'engine_name' => $engineName,
@@ -530,7 +530,7 @@ class Client extends \Swiftype\AbstractClient
             'per_page' => $pageSize,
         ];
 
-        $endpoint = $this->getEndpoint('GetTopQueriesAnalytics');
+        $endpoint = $this->getEndpoint('GetEngineTopQueriesAnalytics');
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

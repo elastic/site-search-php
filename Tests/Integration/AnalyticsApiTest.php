@@ -18,66 +18,38 @@ namespace Swiftype\SiteSearch\Tests\Integration;
 class AnalyticsApiTest extends AbstractClientTestCase
 {
     /**
-     * Test for the searches count API endpoint.
+     * Test count method for Engine Analytics API.
+     *
+     * @param string $method
+     *
+     * @testWith ["getEngineSearchCountAnalytics"]
+     *           ["getEngineClicksCountAnalytics"]
+     *           ["getEngineAutoselectsCountAnalytics"]
      */
-    public function testGetSearchesCount()
+    public function testEngineAnalyticsCountMethod($method)
     {
-        $searchesByDate = self::getDefaultClient()->getSearchCountAnalytics(self::getDefaultEngineName());
+        $counts = self::getDefaultClient()->$method(self::getDefaultEngineName());
 
-        foreach ($searchesByDate as list($date, $count)) {
+        foreach ($counts as list($date, $count)) {
             $this->assertNotFalse(\DateTime::createFromFormat('Y-m-d', $date));
             $this->assertInternalType('int', $count);
         }
     }
 
     /**
-     * Test for the top queries API endpoint.
+     * Test top queries method for Engine Analytics API.
+     *
+     * @param string $method
+     *
+     * @testWith ["getEngineTopQueriesAnalytics"]
+     *           ["getEngineTopNoResultQueriesAnalytics"]
      */
-    public function testGetTopQueries()
+    public function testEngineAnalyticsTopQueriesMethod($method)
     {
-        $topQueries = self::getDefaultClient()->getTopQueriesAnalytics(self::getDefaultEngineName());
+        $topQueries = self::getDefaultClient()->$method(self::getDefaultEngineName());
 
         foreach ($topQueries as list($queryText, $count)) {
             $this->assertInternalType('string', $queryText);
-            $this->assertInternalType('int', $count);
-        }
-    }
-
-    /**
-     * Test for the top no result queries API endpoint.
-     */
-    public function testGetTopNoResultQueriesNoResult()
-    {
-        $topQueries = self::getDefaultClient()->getTopNoResultQueriesAnalytics(self::getDefaultEngineName());
-
-        foreach ($topQueries as list($queryText, $count)) {
-            $this->assertInternalType('string', $queryText);
-            $this->assertInternalType('int', $count);
-        }
-    }
-
-    /**
-     * Test for the top no result queries API endpoint.
-     */
-    public function testGetClicksCount()
-    {
-        $clicksByDate = self::getDefaultClient()->getClicksCountAnalytics(self::getDefaultEngineName());
-
-        foreach ($clicksByDate as list($date, $count)) {
-            $this->assertNotFalse(\DateTime::createFromFormat('Y-m-d', $date));
-            $this->assertInternalType('int', $count);
-        }
-    }
-
-    /**
-     * Test for the top no result queries API endpoint.
-     */
-    public function testGetAutoselectsCount()
-    {
-        $autoselectByDate = self::getDefaultClient()->getAutoselectsCountAnalytics(self::getDefaultEngineName());
-
-        foreach ($autoselectByDate as list($date, $count)) {
-            $this->assertNotFalse(\DateTime::createFromFormat('Y-m-d', $date));
             $this->assertInternalType('int', $count);
         }
     }

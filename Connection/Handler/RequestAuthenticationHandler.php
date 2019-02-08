@@ -22,12 +22,12 @@ class RequestAuthenticationHandler
     /**
      * @var string
      */
-    private const HEADER_NAME = 'Authorization';
+    const HEADER_NAME = 'Authorization';
 
     /**
      * @var string
      */
-    private const HEADER_VALUE_PATTERN = 'Basic %s';
+    const HEADER_VALUE_PATTERN = 'Basic %s';
 
     /**
      * @var callable
@@ -60,9 +60,10 @@ class RequestAuthenticationHandler
      */
     public function __invoke($request)
     {
+        $handler = $this->handler;
         $headerValue = [sprintf(self::HEADER_VALUE_PATTERN, base64_encode($this->apiKey))];
         $request = Core::setHeader($request, self::HEADER_NAME, $headerValue);
 
-        return ($this->handler)($request);
+        return $handler($request);
     }
 }

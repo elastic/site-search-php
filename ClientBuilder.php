@@ -20,12 +20,12 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
     /**
      * @var string
      */
-    private const URI_PREFIX = '/api/v1/';
+    const URI_PREFIX = '/api/v1/';
 
     /**
      * @var string
      */
-    private const API_ENDPOINT = 'https://api.swiftype.com';
+    const API_ENDPOINT = 'https://api.swiftype.com';
 
     /**
      * @var string

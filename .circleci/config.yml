@@ -1,15 +1,36 @@
 version: 2.1
 
-defaults:
-  working_directory: /tmp/build
+install: &install
+  steps:
+  - install_deps
+
+unit_tests: &unit_tests
+  steps:
+  - run_unit_tests
+
+integration_tests: &integration_tests
   environment:
     ST_ENGINE_NAME: php-integration-test-$CIRCLE_BUILD_NUM
+  steps:
+  - run_integration_tests
 
-php_71: &php_71
+php73: &php73
+  docker:
+  - image: circleci/php:7.3-browsers
+
+php72: &php72
+  docker:
+  - image: circleci/php:7.2-browsers
+
+php71: &php71
   docker:
   - image: circleci/php:7.1-browsers
 
-php_56: &php_56
+php70: &php70
+  docker:
+  - image: circleci/php:7.0-browsers
+
+php56: &php56
   docker:
   - image: circleci/php:5.6-browsers
 
@@ -30,317 +51,128 @@ commands:
     - persist_to_workspace:
         root: .
         paths:
-          - .
-  phpunit:
-    parameters:
-      test_suite:
-        type: string
+        - .
+  run_unit_tests:
     steps:
-      - attach_workspace:
-          at: .
-      - run:
-          command: vendor/bin/phpunit -c phpunit.xml.dist --testsuite << parameters.test_suite >>
+    - attach_workspace:
+        at: .
+    - run:
+        name: Unit testing
+        command: vendor/bin/phpunit -c phpunit.xml.dist --testsuite unit
+  run_integration_tests:
+    steps:
+    - attach_workspace:
+        at: .
+    - run:
+        name: Integration testing
+        command: ST_ENGINE_NAME="php-integration-test-$CIRCLE_BUILD_NUM" vendor/bin/phpunit -c phpunit.xml.dist --testsuite integration
 
 jobs:
-  build_php_71:
-    <<: *php_71
-    steps:
-    - install_deps
 
-  test_unit_php_71:
-    <<: *php_71
-    steps:
-    - phpunit:
-        test_suite: unit
+  php-73-install:
+    <<: *install
+    <<: *php73
 
-  build_php_56:
-    <<: *php_56
-    steps:
-    - install_deps
+  php-73-unit-tests:
+    <<: *unit_tests
+    <<: *php73
 
-  test_unit_php_56:
-    <<: *php_56
-    steps:
-    - phpunit:
-        test_suite: unit
+  php-73-integration-tests:
+    <<: *integration_tests
+    <<: *php73
 
+  php-72-install:
+    <<: *install
+    <<: *php72
+
+  php-72-unit-tests:
+    <<: *unit_tests
+    <<: *php72
+
+  php-72-integration-tests:
+    <<: *integration_tests
+    <<: *php72
+
+  php-71-install:
+    <<: *install
+    <<: *php71
+
+  php-71-unit-tests:
+    <<: *unit_tests
+    <<: *php71
+
+  php-71-integration-tests:
+    <<: *integration_tests
+    <<: *php71
+
+  php-70-install:
+    <<: *install
+    <<: *php70
+
+  php-70-unit-tests:
+    <<: *unit_tests
+    <<: *php70
+
+  php-70-integration-tests:
+    <<: *integration_tests
+    <<: *php70
+
+  php-56-install:
+    <<: *install
+    <<: *php56
+
+  php-56-unit-tests:
+    <<: *unit_tests
+    <<: *php56
+
+  php-56-integration-tests:
+    <<: *integration_tests
+    <<: *php56
 
 workflows:
   version: 2
-  build_and_test_php_56:
+  build_and_test_73:
     jobs:
-    - build_php_56
-    - test_unit_php_56:
+    - php-73-install
+    - php-73-unit-tests:
         requires:
-        - build_php_56
-  build_and_test_php_71:
+        - php-73-install
+    - php-73-integration-tests:
+        requires:
+        - php-73-install
+  build_and_test_72:
     jobs:
-    - build_php_71
-    - test_unit_php_71:
+    - php-72-install
+    - php-72-unit-tests:
         requires:
-        - build_php_71
-
-# version: 2.1
-#
-# defaults:
-#   environment:
-#     ST_ENGINE_NAME: php-integration-test-$CIRCLE_BUILD_NUM
-#
-# php_71: &php_71
-#   working_directory: /tmp/build/7.1
-#   docker:
-#   - image: circleci/php:7.1-browsers
-#
-# php_56: &php_56
-#   working_directory: /tmp/build/5.6
-#   docker:
-#   - image: circleci/php:5.6-browsers
-#
-# commands:
-#   install_deps:
-#     steps:
-#       - checkout
-#       - restore_cache:
-#           keys:
-#           - v1-dependencies-{{ checksum "composer.json" }}
-#       - attach_workspace:
-#           at: /tmp/build
-#       - run:
-#           name: Install composer dependencies
-#           command: composer install -n --prefer-dist
-#       - persist_to_workspace:
-#           root: /tmp/build
-#           paths:
-#           - .
-#       - save_cache:
-#           paths:
-#           - ~/.composer/cache/
-#           key: v1-dependencies-{{ checksum "composer.json" }}
-#       - run:
-#           command: ls /tmp/build
-#   phpunit:
-#     parameters:
-#       test_suite:
-#         type: string
-#     steps:
-#       - attach_workspace:
-#           at: /tmp/build
-#       - run:
-#           command: vendor/bin/phpunit -c phpunit.xml.dist --testsuite << parameters.test_suite >>
-#
-# jobs:
-#   build_php_71:
-#     <<: *php_71
-#     steps:
-#     - install_deps
-#
-#   build_php_56:
-#     <<: *php_56
-#     steps:
-#     - install_deps
-#
-#   test_php_71:
-#     <<: *php_71
-#     steps:
-#     - phpunit:
-#         test_suite: unit
-#
-#   test_php_56:
-#     <<: *php_56
-#     steps:
-#     - phpunit:
-#         test_suite: unit
-#
-#   qa_phpcs:
-#     <<: *php_71
-#     steps:
-#     - attach_workspace:
-#         at: /tmp/build
-#     - run:
-#         name: PHPCS
-#         command: vendor/bin/phpcs --ignore=vendor,resources --standard=PSR12 .
-#
-# workflows:
-#   version: 2
-#   build_and_test:
-#     jobs:
-#     - build_php_71
-#     - test_php_71:
-#         requires:
-#         - build_php_71
-#     - qa_phpcs:
-#         requires:
-#         - build_php_71
-#     - build_php_56
-#     - test_php_56:
-#         requires:
-#         - build_php_56
-#
-#
-# version: 2.1
-#
-# php_71: &php_71
-#   working_directory: /tmp/build/7.1
-#   docker:
-#   - image: circleci/php:7.1-browsers
-#   environment:
-#     PHP_VERSION: "7.1"
-#
-# php_56: &php_56
-#   working_directory: /tmp/build/5.6
-#   docker:
-#   - image: circleci/php:5.6-browsers
-#   environment:
-#     PHP_VERSION: "5.6"
-#
-# commands:
-#   install_deps:
-#     steps:
-#       - checkout
-#       - restore_cache:
-#           keys:
-#           - v1-dependencies-{{ checksum "composer.json" }}
-#       - attach_workspace:
-#           at: /tmp/build
-#       - run:
-#           name: Install composer dependencies
-#           command: composer install -n --prefer-dist
-#       - persist_to_workspace:
-#           root: /tmp/build
-#           paths:
-#           - .
-#       - save_cache:
-#           paths:
-#           - ~/.composer/cache/
-#           key: v1-dependencies-{{ checksum "composer.json" }}
-#       - run:
-#           command: ls /tmp/build
-#   phpunit:
-#     parameters:
-#       test_suite:
-#         type: string
-#     steps:
-#       - attach_workspace:
-#           at: /tmp/build
-#       - run:
-#           command: vendor/bin/phpunit -c phpunit.xml.dist --testsuite << parameters.test_suite >>
-#
-# jobs:
-#   build_php_71:
-#     <<: *php_71
-#     steps:
-#     - install_deps
-#
-#   test_unit_php_71:
-#     <<: *php_71
-#     steps:
-#     - phpunit:
-#         test_suite: unit
-#
-#   qa_phpcs:
-#     <<: *php_71
-#     steps:
-#     - attach_workspace:
-#         at: /tmp/build
-#     - run:
-#         name: PHPCS
-#         command: vendor/bin/phpcs --ignore=vendor,resources --standard=PSR12 .
-#
-#   build_php_56:
-#     <<: *php_56
-#     steps:
-#     - install_deps
-#
-#   test_unit_php_56:
-#     <<: *php_56
-#     steps:
-#     - phpunit:
-#         test_suite: unit
-#
-# #
-# workflows:
-#   version: 2
-#   build_and_test:
-#     jobs:
-#     - build_php_71
-#     - test_unit_php_71:
-#         requires:
-#         - build_php_71
-#     - qa_phpcs:
-#         requires:
-#         - build_php_71
-#     - build_php_56
-#     - test_unit_php_71:
-#         requires:
-#         - build_php_56
-#
-#
-# version: 2
-#
-# defaults: &defaults
-#   docker:
-#   - image: circleci/php:7.1-browsers
-#   working_directory: ~/repo
-#
-# jobs:
-#   build:
-#     <<: *defaults
-#     steps:
-#     - checkout
-#     - restore_cache:
-#         keys:
-#         - v1-dependencies-{{ checksum "composer.json" }}
-#         - v1-dependencies-
-#     - run:
-#         name: Install composer dependencies
-#         command: composer install -n --prefer-dist
-#     - persist_to_workspace:
-#         root: .
-#         paths:
-#         - .
-#     - save_cache:
-#         paths:
-#         - ~/.composer/cache/
-#         key: v1-dependencies-{{ checksum "composer.json" }}
-#
-#   test_unit:
-#     <<: *defaults
-#     steps:
-#     - attach_workspace:
-#         at: .
-#     - run:
-#         name: Unit testing
-#         command: vendor/bin/phpunit -c phpunit.xml.dist --testsuite unit
-#
-#   test_integration:
-#     <<: *defaults
-#     steps:
-#     - attach_workspace:
-#         at: .
-#     - run:
-#         name: Integration testing
-#         command: ST_ENGINE_NAME="php-integration-test-$CIRCLE_BUILD_NUM" vendor/bin/phpunit -c phpunit.xml.dist --testsuite integration``
-#
-#   test_phpcs:
-#     <<: *defaults
-#     steps:
-#     - attach_workspace:
-#         at: .
-#     - run:
-#         name: PHPCS
-#         command: vendor/bin/phpcs --ignore=vendor,resources --standard=PSR12 .
-#
-# workflows:
-#   version: 2
-#   build_and_test:
-#     jobs:
-#     - build
-#     - test_unit:
-#         requires:
-#         - build
-#     - test_integration:
-#         requires:
-#         - build
-#     - test_phpcs:
-#         requires:
-#         - build
+        - php-72-install
+    - php-72-integration-tests:
+        requires:
+        - php-72-install
+  build_and_test_71:
+    jobs:
+    - php-71-install
+    - php-71-unit-tests:
+        requires:
+        - php-71-install
+    - php-71-integration-tests:
+        requires:
+        - php-71-install
+  build_and_test_70:
+    jobs:
+    - php-70-install
+    - php-70-unit-tests:
+        requires:
+        - php-70-install
+    - php-70-integration-tests:
+        requires:
+        - php-70-install
+  build_and_test_56:
+    jobs:
+    - php-56-install
+    - php-56-unit-tests:
+        requires:
+        - php-56-install
+    - php-56-integration-tests:
+        requires:
+        - php-56-install

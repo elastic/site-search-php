@@ -31,6 +31,15 @@ commands:
         root: .
         paths:
           - .
+  phpunit:
+    parameters:
+      test_suite:
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          command: vendor/bin/phpunit -c phpunit.xml.dist --testsuite << parameters.test_suite >>
 
 jobs:
   build_php_71:
@@ -38,19 +47,38 @@ jobs:
     steps:
     - install_deps
 
+  test_unit_php_71:
+    <<: *php_71
+    steps:
+    - phpunit:
+        test_suite: unit
+
   build_php_56:
     <<: *php_56
     steps:
     - install_deps
+
+  test_unit_php_56:
+    <<: *php_56
+    steps:
+    - phpunit:
+        test_suite: unit
+
 
 workflows:
   version: 2
   build_and_test_php_56:
     jobs:
     - build_php_56
+    - test_unit_php_56:
+        requires:
+        - build_php_56
   build_and_test_php_71:
     jobs:
     - build_php_71
+    - test_unit_php_71:
+        requires:
+        - build_php_71
 
 # version: 2.1
 #

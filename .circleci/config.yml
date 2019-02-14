@@ -110,25 +110,45 @@ jobs:
     <<: *integration_tests
     <<: *php56
 
+  qa-phplint:
+    <<: *php73
+    steps:
+    - install_deps
+    - run:
+        name:
+        command: vendor/bin/phplint . --exclude=vendor
+
+  qa-phpcs:
+    <<: *php73
+    steps:
+    - install_deps
+    - run:
+        name: PHPCS
+        command: vendor/bin/phpcs --ignore=vendor,resources --standard=PSR12 .
+
 workflows:
   version: 2
-  build_and_test_73:
+  qa:
+    jobs:
+    - qa-phplint
+    - qa-phpcs
+  php-73-tests:
     jobs:
     - php-73-unit-tests
     - php-73-integration-tests
-  build_and_test_72:
+  php-72-tests:
     jobs:
     - php-72-unit-tests
     - php-72-integration-tests
-  build_and_test_71:
+  php-71-tests:
     jobs:
     - php-71-unit-tests
     - php-71-integration-tests
-  build_and_test_70:
+  php-70-tests:
     jobs:
     - php-70-unit-tests
     - php-70-integration-tests
-  build_and_test_56:
+  php-56-tests:
     jobs:
     - php-56-unit-tests
     - php-56-integration-tests

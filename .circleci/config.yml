@@ -1,17 +1,15 @@
 version: 2.1
 
-install: &install
-  steps:
-  - install_deps
-
 unit_tests: &unit_tests
   steps:
+  - install_deps
   - run_unit_tests
 
 integration_tests: &integration_tests
   environment:
     ST_ENGINE_NAME: php-integration-test-$CIRCLE_BUILD_NUM
   steps:
+  - install_deps
   - run_integration_tests
 
 php73: &php73
@@ -35,12 +33,15 @@ php56: &php56
   - image: circleci/php:5.6-browsers
 
 commands:
+
   install_deps:
     steps:
     - checkout
     - restore_cache:
         keys:
         - v1-dependencies-{{ checksum "composer.json" }}
+    - attach_workspace:
+        at: .
     - run:
         name: Install composer dependencies
         command: composer install -n --prefer-dist
@@ -52,13 +53,13 @@ commands:
         root: .
         paths:
         - .
+
   run_unit_tests:
     steps:
-    - attach_workspace:
-        at: .
     - run:
         name: Unit testing
         command: vendor/bin/phpunit -c phpunit.xml.dist --testsuite unit
+
   run_integration_tests:
     steps:
     - attach_workspace:
@@ -69,10 +70,6 @@ commands:
 
 jobs:
 
-  php-73-install:
-    <<: *install
-    <<: *php73
-
   php-73-unit-tests:
     <<: *unit_tests
     <<: *php73
@@ -80,10 +77,6 @@ jobs:
   php-73-integration-tests:
     <<: *integration_tests
     <<: *php73
-
-  php-72-install:
-    <<: *install
-    <<: *php72
 
   php-72-unit-tests:
     <<: *unit_tests
@@ -93,10 +86,6 @@ jobs:
     <<: *integration_tests
     <<: *php72
 
-  php-71-install:
-    <<: *install
-    <<: *php71
-
   php-71-unit-tests:
     <<: *unit_tests
     <<: *php71
@@ -105,10 +94,6 @@ jobs:
     <<: *integration_tests
     <<: *php71
 
-  php-70-install:
-    <<: *install
-    <<: *php70
-
   php-70-unit-tests:
     <<: *unit_tests
     <<: *php70
@@ -116,10 +101,6 @@ jobs:
   php-70-integration-tests:
     <<: *integration_tests
     <<: *php70
-
-  php-56-install:
-    <<: *install
-    <<: *php56
 
   php-56-unit-tests:
     <<: *unit_tests
@@ -133,46 +114,21 @@ workflows:
   version: 2
   build_and_test_73:
     jobs:
-    - php-73-install
-    - php-73-unit-tests:
-        requires:
-        - php-73-install
-    - php-73-integration-tests:
-        requires:
-        - php-73-install
+    - php-73-unit-tests
+    - php-73-integration-tests
   build_and_test_72:
     jobs:
-    - php-72-install
-    - php-72-unit-tests:
-        requires:
-        - php-72-install
-    - php-72-integration-tests:
-        requires:
-        - php-72-install
+    - php-72-unit-tests
+    - php-72-integration-tests
   build_and_test_71:
     jobs:
-    - php-71-install
-    - php-71-unit-tests:
-        requires:
-        - php-71-install
-    - php-71-integration-tests:
-        requires:
-        - php-71-install
+    - php-71-unit-tests
+    - php-71-integration-tests
   build_and_test_70:
     jobs:
-    - php-70-install
-    - php-70-unit-tests:
-        requires:
-        - php-70-install
-    - php-70-integration-tests:
-        requires:
-        - php-70-install
+    - php-70-unit-tests
+    - php-70-integration-tests
   build_and_test_56:
     jobs:
-    - php-56-install
-    - php-56-unit-tests:
-        requires:
-        - php-56-install
-    - php-56-integration-tests:
-        requires:
-        - php-56-install
+    - php-56-unit-tests
+    - php-56-integration-tests

@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class GetEngineAutoselectsCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
+class GetAutoselectsCountAnalyticsEngine extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**

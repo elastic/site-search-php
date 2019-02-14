@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class GetDocumentTypeTopNoResultQueriesAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
+class GetTopQueriesAnalyticsEngine extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
@@ -26,9 +26,9 @@ class GetDocumentTypeTopNoResultQueriesAnalytics extends \Swiftype\Endpoint\Abst
     /**
      * @var string
      */
-    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/analytics/top_no_result_queries.json';
+    protected $uri = '/engines/{engine_name}/analytics/top_queries.json';
 
-    protected $routeParams = ['engine_name', 'document_type_id'];
+    protected $routeParams = ['engine_name'];
 
     protected $paramWhitelist = ['start_date', 'end_date', 'page', 'per_page'];
     // phpcs:enable

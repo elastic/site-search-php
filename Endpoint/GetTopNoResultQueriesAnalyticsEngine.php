@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class GetEngineTopNoResultQueriesAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
+class GetTopNoResultQueriesAnalyticsEngine extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**

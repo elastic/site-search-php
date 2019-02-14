@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class GetEngineClicksCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
+class GetSearchCountAnalyticsEngine extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
@@ -26,7 +26,7 @@ class GetEngineClicksCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
     /**
      * @var string
      */
-    protected $uri = '/engines/{engine_name}/analytics/clicks.json';
+    protected $uri = '/engines/{engine_name}/analytics/searches.json';
 
     protected $routeParams = ['engine_name'];
 

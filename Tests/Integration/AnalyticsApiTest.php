@@ -22,9 +22,9 @@ class AnalyticsApiTest extends AbstractClientTestCase
      *
      * @param string $method
      *
-     * @testWith ["getEngineSearchCountAnalytics"]
-     *           ["getEngineClicksCountAnalytics"]
-     *           ["getEngineAutoselectsCountAnalytics"]
+     * @testWith ["getSearchCountAnalyticsEngine"]
+     *           ["getClicksCountAnalyticsEngine"]
+     *           ["getAutoselectsCountAnalyticsEngine"]
      */
     public function testEngineAnalyticsCountMethod($method)
     {
@@ -41,8 +41,8 @@ class AnalyticsApiTest extends AbstractClientTestCase
      *
      * @param string $method
      *
-     * @testWith ["getEngineTopQueriesAnalytics"]
-     *           ["getEngineTopNoResultQueriesAnalytics"]
+     * @testWith ["getTopQueriesAnalyticsEngine"]
+     *           ["getTopNoResultQueriesAnalyticsEngine"]
      */
     public function testEngineAnalyticsTopQueriesMethod($method)
     {
@@ -59,9 +59,9 @@ class AnalyticsApiTest extends AbstractClientTestCase
      *
      * @param string $method
      *
-     * @testWith ["getDocumentTypeSearchCountAnalytics"]
-     *           ["getDocumentTypeClicksCountAnalytics"]
-     *           ["getDocumentTypeAutoselectsCountAnalytics"]
+     * @testWith ["getSearchCountAnalyticsDocumentType"]
+     *           ["getClicksCountAnalyticsDocumentType"]
+     *           ["getAutoselectsCountAnalyticsDocumentType"]
      */
     public function testDocumentTypeAnalyticsCountMethod($method)
     {
@@ -78,8 +78,8 @@ class AnalyticsApiTest extends AbstractClientTestCase
      *
      * @param string $method
      *
-     * @testWith ["getDocumentTypeTopQueriesAnalytics"]
-     *           ["getDocumentTypeTopNoResultQueriesAnalytics"]
+     * @testWith ["getTopQueriesAnalyticsDocumentType"]
+     *           ["getTopNoResultQueriesAnalyticsDocumentType"]
      */
     public function testDocumentTypeAnalyticsTopQueriesMethod($method)
     {

@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class BulkCreateOrUpdateDocuments extends \Swiftype\Endpoint\AbstractEndpoint
+class GetTopNoResultQueriesAnalyticsEngine extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
@@ -26,10 +26,10 @@ class BulkCreateOrUpdateDocuments extends \Swiftype\Endpoint\AbstractEndpoint
     /**
      * @var string
      */
-    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/documents/bulk_create_or_update_verbose';
+    protected $uri = '/engines/{engine_name}/analytics/top_no_result_queries.json';
 
-    protected $routeParams = ['engine_name', 'document_type_id'];
+    protected $routeParams = ['engine_name'];
 
-    protected $paramWhitelist = ['documents'];
+    protected $paramWhitelist = ['start_date', 'end_date', 'page', 'per_page'];
     // phpcs:enable
 }

@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class GetDocumentTypeSearchCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
+class DeleteDocuments extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
@@ -26,10 +26,10 @@ class GetDocumentTypeSearchCountAnalytics extends \Swiftype\Endpoint\AbstractEnd
     /**
      * @var string
      */
-    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/analytics/searches.json';
+    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/documents/bulk_destroy';
 
     protected $routeParams = ['engine_name', 'document_type_id'];
 
-    protected $paramWhitelist = ['start_date', 'end_date'];
+    protected $paramWhitelist = ['documents'];
     // phpcs:enable
 }

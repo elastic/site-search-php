@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class GetDocumentTypeClicksCountAnalytics extends \Swiftype\Endpoint\AbstractEndpoint
+class GetTopNoResultQueriesAnalyticsDocumentType extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
@@ -26,10 +26,10 @@ class GetDocumentTypeClicksCountAnalytics extends \Swiftype\Endpoint\AbstractEnd
     /**
      * @var string
      */
-    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/analytics/clicks.json';
+    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/analytics/top_no_result_queries.json';
 
     protected $routeParams = ['engine_name', 'document_type_id'];
 
-    protected $paramWhitelist = ['start_date', 'end_date'];
+    protected $paramWhitelist = ['start_date', 'end_date', 'page', 'per_page'];
     // phpcs:enable
 }

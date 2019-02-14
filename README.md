@@ -17,7 +17,7 @@
 
 ## Getting started 🐣
 
-Using this client assumes that you have already created an Site Search account on https://swiftype.com/.
+Using this client assumes that you have already created a Site Search account on https://swiftype.com/.
 
 You can install the client in your project by using composer:
 
@@ -71,7 +71,7 @@ The list of supported language is available here : https://swiftype.com/document
 
 #### Document types
 
-When using Site Search every document has an associated document type.
+When using Site Search every document has an associated DocumentType.
 
 You can list available document types in an engine by using the `Client::listDocumentTypes` method:
 
@@ -79,7 +79,7 @@ You can list available document types in an engine by using the `Client::listDoc
   $documentTypes = $client->listDocumentTypes('my-engine');
 ```
 
-In order to index documentsn you need to create at least one document type in ypur engine. This can be done by using the Client::createDocumentType` method:
+In order to index documents you need to create at least one DocumentType in your engine. This can be done by using the Client::createDocumentType` method:
 
 ```
   $documentType = $client->createDocumentType('my-engine', 'my-document-type');
@@ -114,9 +114,9 @@ In order to index some documents in the Engine you can use the `Client::bulkCrea
 
 - The `$indexingResults` array will contains the result of the indexation of each documents. You should always check the content of the result.
 
-- A full list of available field types and associated use cases is available here : https://swiftype.com/documentation/site-search/overview#fieldtype
+- A full list of available field types and associated use cases is available here: https://swiftype.com/documentation/site-search/overview#fieldtype
 
-- Full documentation for the endpoint and other method available to index documents is available here : https://swiftype.com/documentation/site-search/indexing.
+- Full documentation for the endpoint and other method available to index documents is available here: https://swiftype.com/documentation/site-search/indexing.
 
 #### Search
 
@@ -139,7 +139,7 @@ Param name                        | Description                             | Do
 ----------------------------------|-----------------------------------------|--------------------------------------------------------------------------
 `per_page` and `page`             | Control pagination.                     | https://swiftype.com/documentation/site-search/searching/pagination
 `document_types`                  | Searched document types.                | https://swiftype.com/documentation/site-search/searching/documenttypes
-`filters`                         | Search filters                          | https://swiftype.com/documentation/site-search/searching/field-weights
+`filters`                         | Search filters                          | https://swiftype.com/documentation/site-search/searching/filtering
 `facets`                          | Search facets.                          | https://swiftype.com/documentation/site-search/searching/faceting
 `boosts`                          | Search boosts.                          | https://swiftype.com/documentation/site-search/searching/boosting
 `fetch_fields`                    | Fields returned by the search.          | https://swiftype.com/documentation/site-search/searching/fetch-fields
@@ -154,7 +154,7 @@ Method      | Description | Documentation
 ------------|-------------|--------------
 **`asyncCreateOrUpdateDocuments`**| Async bulk creation or update of documents in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documents` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_indexing)
 **`createDocument`**| Create a new document in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documentExternalId` (required) <br />   - `$documentFields` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
-**`createDocumentType`**| Create a new document type in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeName` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-documenttype)
+**`createDocumentType`**| Create a new DocumentType in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeName` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-documenttype)
 **`createDocuments`**| Bulk creation of documents in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documents` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#bulk_create)
 **`createEngine`**| Create a new API based engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$engineLanguage`<br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/engines#create)
 **`createOrUpdateDocument`**| Create or update a document in an engine.<br/> <br/> **Parameters :** <br />  - `$engineName` (required) <br />   - `$documentTypeId` (required) <br />   - `$documentExternalId` (required) <br />   - `$documentFields` (required) <br/>|[Endpoint Documentation](https://swiftype.com/documentation/site-search/indexing#add-document)
@@ -188,7 +188,7 @@ Method      | Description | Documentation
 
 ## Development
 
-Code for the endpoints are generated automatically using a custom version of [OpenAPI Generator](https://github.com/openapitools/openapi-generator).
+Code for the endpoints is generated automatically using a custom version of [OpenAPI Generator](https://github.com/openapitools/openapi-generator).
 
 The easier way to regenerate endpoints is to use the docker laucher packaged in `vendor/bin`:
 
@@ -196,11 +196,11 @@ The easier way to regenerate endpoints is to use the docker laucher packaged in 
 ./vendor/bin/swiftype-codegen.sh
 ```
 
-The custom generator will be build and launched using the following Open API spec file : `resources/api/api-spec.yml`.
+The custom generator will be built and launched using the following Open API spec file : `resources/api/api-spec.yml`.
 
-You can then commit and PR your endpoint code and modified api-spec files.
+You can then commit and PR your endpoint code and modified the api-spec files.
 
-The client class may be changed in some case. Do not forget to include it in your commit.
+The client class may be changed in some case. Do not forget to include it in your commit!
 
 ## FAQ 🔮
 

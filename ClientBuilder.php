@@ -42,7 +42,7 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
      */
     public static function create($apiKey = null)
     {
-        return (new static())->setApiKey($apiKey);
+        return (new static())->setHost(self::API_ENDPOINT)->setApiKey($apiKey);
     }
 
     /**
@@ -76,7 +76,7 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
     {
         $handler = parent::getHandler();
         $handler = new Connection\Handler\RequestAuthenticationHandler($handler, $this->apiKey);
-        $handler = new \Swiftype\Connection\Handler\RequestUrlHandler($handler, self::API_ENDPOINT, self::URI_PREFIX);
+        $handler = new \Swiftype\Connection\Handler\RequestUrlPrefixHandler($handler, self::URI_PREFIX);
         $handler = new Connection\Handler\ApiErrorHandler($handler);
 
         return $handler;

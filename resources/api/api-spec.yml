@@ -565,7 +565,7 @@ paths:
     - $ref: "#/components/parameters/engineNameParam"
     - $ref: "#/components/parameters/documentTypeId"
     post:
-      operationId: bulkCreateOrUpdateDocuments
+      operationId: createOrUpdateDocuments
       summary: Bulk creation or update of documents in an engine.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/indexing#bulk_create_or_update_verbose
@@ -587,7 +587,7 @@ paths:
     - $ref: "#/components/parameters/engineNameParam"
     - $ref: "#/components/parameters/documentTypeId"
     post:
-      operationId: bulkCreateDocuments
+      operationId: createDocuments
       summary: Bulk creation of documents in an engine.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/indexing#bulk_create
@@ -609,7 +609,7 @@ paths:
     - $ref: "#/components/parameters/engineNameParam"
     - $ref: "#/components/parameters/documentTypeId"
     put:
-      operationId: bulkUpdateDocuments
+      operationId: updateDocuments
       summary: Bulk update of documents in an engine.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/indexing#bulk_update
@@ -632,7 +632,7 @@ paths:
     - $ref: "#/components/parameters/engineNameParam"
     - $ref: "#/components/parameters/documentTypeId"
     post:
-      operationId: bulkDeleteDocuments
+      operationId: deleteDocuments
       summary: Bulk delete of documents in an engine.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/indexing#bulk_destroy
@@ -654,7 +654,7 @@ paths:
     - $ref: "#/components/parameters/engineNameParam"
     - $ref: "#/components/parameters/documentTypeId"
     post:
-      operationId: asyncBulkCreateOrUpdateDocuments
+      operationId: asyncCreateOrUpdateDocuments
       summary: Async bulk creation or update of documents in an engine.
       externalDocs:
         url: https://swiftype.com/documentation/site-search/indexing#bulk_indexing

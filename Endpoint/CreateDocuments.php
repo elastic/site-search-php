@@ -15,7 +15,7 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class AsyncBulkCreateOrUpdateDocuments extends \Swiftype\Endpoint\AbstractEndpoint
+class CreateDocuments extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
@@ -26,7 +26,7 @@ class AsyncBulkCreateOrUpdateDocuments extends \Swiftype\Endpoint\AbstractEndpoi
     /**
      * @var string
      */
-    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/documents/async_bulk_create_or_update';
+    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/documents/bulk_create';
 
     protected $routeParams = ['engine_name', 'document_type_id'];
 

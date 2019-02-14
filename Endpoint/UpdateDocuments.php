@@ -15,18 +15,18 @@ namespace Swiftype\SiteSearch\Endpoint;
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class BulkDeleteDocuments extends \Swiftype\Endpoint\AbstractEndpoint
+class UpdateDocuments extends \Swiftype\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**
      * @var string
      */
-    protected $method = 'POST';
+    protected $method = 'PUT';
 
     /**
      * @var string
      */
-    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/documents/bulk_destroy';
+    protected $uri = '/engines/{engine_name}/document_types/{document_type_id}/documents/bulk_update';
 
     protected $routeParams = ['engine_name', 'document_type_id'];
 

@@ -30,7 +30,7 @@ class BulkDocumentApiTest extends AbstractEngineTestCase
             ['external_id' => 'doc1', 'fields' => [['name' => 'title', 'value' => 'Doc 1', 'type' => 'string']]],
             ['external_id' => 'doc2', 'fields' => [['name' => 'title', 'value' => 'Doc 2', 'type' => 'string']]],
         ];
-        $bulkResponse = $client->bulkCreateDocuments($engine, $typeId, $documents);
+        $bulkResponse = $client->createDocuments($engine, $typeId, $documents);
         $this->assertCount(count($documents), $bulkResponse);
         $this->assertNotContains(false, $bulkResponse);
         $this->assertCount(count($documents), $client->listDocuments($engine, $typeId));
@@ -39,7 +39,7 @@ class BulkDocumentApiTest extends AbstractEngineTestCase
             'external_id' => 'doc3',
             'fields' => [['name' => 'title', 'value' => 'Doc 3', 'type' => 'string']],
         ];
-        $bulkResponse = $client->bulkCreateOrUpdateDocuments($engine, $typeId, $documents);
+        $bulkResponse = $client->createOrUpdateDocuments($engine, $typeId, $documents);
         $this->assertCount(count($documents), $bulkResponse);
         $this->assertNotContains(false, $bulkResponse);
         $this->assertCount(count($documents), $client->listDocuments($engine, $typeId));
@@ -48,12 +48,12 @@ class BulkDocumentApiTest extends AbstractEngineTestCase
             ['external_id' => 'doc1', 'fields' => ['title' => 'Doc 1 updated']],
             ['external_id' => 'doc2', 'fields' => ['title' => 'Doc 2 updated']],
         ];
-        $bulkResponse = $client->bulkUpdateDocuments($engine, $typeId, $documentUpdates);
+        $bulkResponse = $client->updateDocuments($engine, $typeId, $documentUpdates);
         $this->assertCount(count($documentUpdates), $bulkResponse);
         $this->assertNotContains(false, $bulkResponse);
 
         $deletedDocIds = array_column($documents, 'external_id');
-        $bulkResponse = $client->bulkDeleteDocuments($engine, $typeId, $deletedDocIds);
+        $bulkResponse = $client->deleteDocuments($engine, $typeId, $deletedDocIds);
         $this->assertCount(count($deletedDocIds), $bulkResponse);
         $this->assertNotContains(false, $bulkResponse);
         $this->assertEmpty($client->listDocuments($engine, $typeId));
@@ -73,7 +73,7 @@ class BulkDocumentApiTest extends AbstractEngineTestCase
             ['external_id' => 'doc2', 'fields' => [['name' => 'title', 'value' => 'Doc 2', 'type' => 'string']]],
         ];
 
-        $bulkResponse = $client->asyncBulkCreateOrUpdateDocuments($engine, $typeId, $documents);
+        $bulkResponse = $client->asyncCreateOrUpdateDocuments($engine, $typeId, $documents);
         $this->assertCount(count($documents), $bulkResponse);
         $receiptIds = array_column($bulkResponse['document_receipts'], 'id');
 

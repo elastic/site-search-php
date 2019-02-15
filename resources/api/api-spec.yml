@@ -387,7 +387,7 @@ paths:
       - Engine API
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types.json:
     parameters:
@@ -408,7 +408,7 @@ paths:
           type: string
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
     get:
       operationId: listDocumentTypes
       summary: List all document types for an engine.
@@ -418,7 +418,7 @@ paths:
       - Document API
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}.json:
     parameters:
@@ -433,7 +433,7 @@ paths:
       - Document API
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
     delete:
       operationId: deleteDocumentType
       summary: Delete a document type by id.
@@ -443,7 +443,7 @@ paths:
       - Document API
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/documents.json:
     parameters:
@@ -471,7 +471,7 @@ paths:
           $ref: "#/components/schemas/documentFieldList"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
     get:
       operationId: listDocuments
       summary: List all documents in an engine.
@@ -481,7 +481,7 @@ paths:
       - Document API
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/documents/create_or_update.json:
     parameters:
@@ -509,7 +509,7 @@ paths:
           $ref: "#/components/schemas/documentFieldList"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/documents/{external_id}.json:
     parameters:
@@ -525,7 +525,7 @@ paths:
       - Document API
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
     delete:
       operationId: deleteDocument
       summary: Delete a document from the engine.
@@ -535,7 +535,7 @@ paths:
       - Document API
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/documents/{external_id}/update_fields.json:
     parameters:
@@ -558,7 +558,7 @@ paths:
           $ref: "#/components/schemas/documentFieldsUpdate"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/documents/bulk_create_or_update_verbose:
     parameters:
@@ -580,7 +580,7 @@ paths:
           $ref: "#/components/schemas/documentIndexBulk"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/documents/bulk_create:
     parameters:
@@ -602,7 +602,7 @@ paths:
           $ref: "#/components/schemas/documentIndexBulk"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/documents/bulk_update:
     parameters:
@@ -624,7 +624,7 @@ paths:
           $ref: "#/components/schemas/documentUpdateBulk"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
 
   /engines/{engine_name}/document_types/{document_type_id}/documents/bulk_destroy:
@@ -647,7 +647,7 @@ paths:
           $ref: "#/components/schemas/documentExternalIdList"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/documents/async_bulk_create_or_update:
     parameters:
@@ -669,7 +669,7 @@ paths:
           $ref: "#/components/schemas/documentIndexBulk"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /document_receipts.json:
     post:
@@ -691,7 +691,7 @@ paths:
             type: string
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/search.json:
     parameters:
@@ -709,7 +709,7 @@ paths:
         $ref: "#/components/requestBodies/searchRequestParams"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/suggest.json:
     parameters:
@@ -727,7 +727,7 @@ paths:
         $ref: "#/components/requestBodies/searchRequestParams"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/analytics/log_clickthrough.json:
     parameters:
@@ -751,7 +751,7 @@ paths:
       - $ref: "#/components/parameters/searchQueryText"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/analytics/searches.json:
     parameters:
@@ -768,7 +768,7 @@ paths:
       - $ref: "#/components/parameters/analyticsEndDate"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/analytics/searches.json:
     parameters:
@@ -786,7 +786,7 @@ paths:
       - $ref: "#/components/parameters/analyticsEndDate"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/analytics/top_queries.json:
     parameters:
@@ -805,7 +805,7 @@ paths:
       - $ref: "#/components/parameters/pageSize"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/analytics/top_queries.json:
     parameters:
@@ -825,7 +825,7 @@ paths:
       - $ref: "#/components/parameters/pageSize"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/analytics/top_no_result_queries.json:
     parameters:
@@ -844,7 +844,7 @@ paths:
       - $ref: "#/components/parameters/pageSize"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/analytics/top_no_result_queries.json:
     parameters:
@@ -864,7 +864,7 @@ paths:
       - $ref: "#/components/parameters/pageSize"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/analytics/clicks.json:
     parameters:
@@ -881,7 +881,7 @@ paths:
       - $ref: "#/components/parameters/analyticsEndDate"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/analytics/clicks.json:
     parameters:
@@ -899,7 +899,7 @@ paths:
       - $ref: "#/components/parameters/analyticsEndDate"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/analytics/autoselects.json:
     parameters:
@@ -916,7 +916,7 @@ paths:
       - $ref: "#/components/parameters/analyticsEndDate"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"
 
   /engines/{engine_name}/document_types/{document_type_id}/analytics/autoselects.json:
     parameters:
@@ -934,4 +934,4 @@ paths:
       - $ref: "#/components/parameters/analyticsEndDate"
       responses:
         default:
-          $ref: "#/components/responseBodies/jsonResponse"
+          $ref: "#/components/responses/jsonResponse"

@@ -12,8 +12,6 @@ namespace Swiftype\SiteSearch\Endpoint;
  * Implementation of the  endpoint.
  *
  * @package Swiftype\SiteSearch\Endpoint
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
 class GetSearchCountAnalyticsDocumentType extends \Swiftype\Endpoint\AbstractEndpoint
 {

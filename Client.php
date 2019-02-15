@@ -12,8 +12,6 @@ namespace Swiftype\SiteSearch;
  * Client implementation.
  *
  * @package Swiftype
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
 class Client extends \Swiftype\AbstractClient
 {

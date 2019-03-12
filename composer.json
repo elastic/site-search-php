@@ -1,7 +1,7 @@
 {
   "name" : "swiftype/swiftype-site-search-php",
   "description" : "Swiftype Site Search Official PHP Client",
-  "homepage": "https://github.com/swiftype/swiftype-app-search-php",
+  "homepage": "https://github.com/swiftype/swiftype-site-search-php",
   "keywords" : [
     "search",
     "client",

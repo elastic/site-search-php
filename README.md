@@ -230,3 +230,4 @@ We welcome contributors to the project. Before you begin, a couple notes...
 [Apache 2.0](https://github.com/swiftype/swiftype-site-search-php/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
 
 Thank you to all the [contributors](https://github.com/swiftype/swiftype-site-search-php/graphs/contributors)!
+

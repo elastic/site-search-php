@@ -6,16 +6,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Unit\Connection\Handler;
+namespace Elastic\SiteSearch\Client\Tests\Unit\Connection\Handler;
 
 use PHPUnit\Framework\TestCase;
-use Swiftype\SiteSearch\Client;
-use Swiftype\SiteSearch\ClientBuilder;
+use Elastic\SiteSearch\Client\Client;
+use Elastic\SiteSearch\Client\ClientBuilder;
 
 /**
  * Check the client builder is able to instantiate new clients.
  *
- * @package Swiftype\SiteSearch\Test\Unit
+ * @package Elastic\SiteSearch\Client\Test\Unit
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */

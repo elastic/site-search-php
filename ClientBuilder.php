@@ -6,12 +6,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch;
+namespace Elastic\SiteSearch\Client;
 
 /**
  * Use this class to instantiate new client and all their dependencies.
  *
- * @package Swiftype\SiteSearch
+ * @package Elastic\SiteSearch\Client
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
@@ -38,7 +38,7 @@ class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
      * @param string $hostIdentifier
      * @param string $apiKey
      *
-     * @return \Swiftype\SiteSearch\ClientBuilder
+     * @return \Elastic\SiteSearch\Client\ClientBuilder
      */
     public static function create($apiKey = null)
     {
@@ -62,7 +62,7 @@ class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
     /**
      * Return the configured Swiftype client.
      *
-     * @return \Swiftype\SiteSearch\Client
+     * @return \Elastic\SiteSearch\Client\Client
      */
     public function build()
     {

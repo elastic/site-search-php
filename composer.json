@@ -27,7 +27,7 @@
   },
   "autoload" : {
     "psr-4" : {
-      "Swiftype\\SiteSearch\\" : ""
+      "Elastic\\SiteSearch\Client\\Client\\" : ""
     },
     "exclude-from-classmap" : [
       "/Tests/"

@@ -6,12 +6,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Endpoint;
+namespace Elastic\SiteSearch\Client\Endpoint;
 
 /**
  * Implementation of the  endpoint.
  *
- * @package Swiftype\SiteSearch\Endpoint
+ * @package Elastic\SiteSearch\Client\Endpoint
  */
 class ListEngines extends \Elastic\OpenApi\Codegen\Endpoint\AbstractEndpoint
 {

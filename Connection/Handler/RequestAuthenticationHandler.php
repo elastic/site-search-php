@@ -6,14 +6,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Connection\Handler;
+namespace Elastic\SiteSearch\Client\Connection\Handler;
 
 use GuzzleHttp\Ring\Core;
 
 /**
  * This handler add automatically the API Key to the request.
  *
- * @package Swiftype\SiteSearch\Connection\Handler
+ * @package Elastic\SiteSearch\Client\Connection\Handler
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */

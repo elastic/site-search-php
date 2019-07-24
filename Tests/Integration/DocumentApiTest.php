@@ -6,14 +6,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Integration;
+namespace Elastic\SiteSearch\Client\Tests\Integration;
 
 use Elastic\OpenApi\Codegen\Exception\NotFoundException;
 
 /**
  * Integrations test for the Document API.
  *
- * @package Swiftype\SiteSearch\Test\Integration
+ * @package Elastic\SiteSearch\Client\Test\Integration
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */

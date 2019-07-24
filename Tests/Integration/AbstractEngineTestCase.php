@@ -6,12 +6,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Integration;
+namespace Elastic\SiteSearch\Client\Tests\Integration;
 
 /**
  * A base class for running client tests with a default engine and some sample optional docs.
  *
- * @package Swiftype\SiteSearch\Test\Integration
+ * @package Elastic\SiteSearch\Client\Test\Integration
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */

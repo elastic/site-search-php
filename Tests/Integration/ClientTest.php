@@ -6,15 +6,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Integration;
+namespace Elastic\SiteSearch\Client\Tests\Integration;
 
-use Swiftype\SiteSearch\ClientBuilder;
-use Swiftype\SiteSearch\Client;
+use Elastic\SiteSearch\Client\ClientBuilder;
+use Elastic\SiteSearch\Client\Client;
 
 /**
  * Testing client instantiaton and error handling.
  *
- * @package Swiftype\SiteSearch\Test\Integration
+ * @package Elastic\SiteSearch\Client\Test\Integration
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */

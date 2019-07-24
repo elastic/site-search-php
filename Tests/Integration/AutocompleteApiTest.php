@@ -6,12 +6,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Integration;
+namespace Elastic\SiteSearch\Client\Tests\Integration;
 
 /**
  * Integration tests for the Autocomplete API.
  *
- * @package Swiftype\SiteSearch\Test\Integration
+ * @package Elastic\SiteSearch\Client\Test\Integration
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */

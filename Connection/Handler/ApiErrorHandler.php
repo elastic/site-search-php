@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Connection\Handler;
+namespace Elastic\SiteSearch\Client\Connection\Handler;
 
 use GuzzleHttp\Ring\Core;
 use Elastic\OpenApi\Codegen\Exception\ApiException;
@@ -17,7 +17,7 @@ use Elastic\OpenApi\Codegen\Exception\NotFoundException;
 /**
  * This handler manage server side errors and throw comprehensive exceptions to the user.
  *
- * @package Swiftype\SiteSearch\Connection\Handler
+ * @package Elastic\SiteSearch\Client\Connection\Handler
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */

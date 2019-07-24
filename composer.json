@@ -27,7 +27,7 @@
   },
   "autoload" : {
     "psr-4" : {
-      "Elastic\\SiteSearch\Client\\Client\\" : ""
+      "Elastic\\SiteSearch\\Client\\" : ""
     },
     "exclude-from-classmap" : [
       "/Tests/"

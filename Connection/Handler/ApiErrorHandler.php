@@ -9,10 +9,10 @@
 namespace Swiftype\SiteSearch\Connection\Handler;
 
 use GuzzleHttp\Ring\Core;
-use Swiftype\Exception\ApiException;
-use Swiftype\Exception\AuthenticationException;
-use Swiftype\Exception\BadRequestException;
-use Swiftype\Exception\NotFoundException;
+use Elastic\OpenApi\Codegen\Exception\ApiException;
+use Elastic\OpenApi\Codegen\Exception\AuthenticationException;
+use Elastic\OpenApi\Codegen\Exception\BadRequestException;
+use Elastic\OpenApi\Codegen\Exception\NotFoundException;
 
 /**
  * This handler manage server side errors and throw comprehensive exceptions to the user.

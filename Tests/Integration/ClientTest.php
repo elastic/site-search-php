@@ -32,7 +32,7 @@ class ClientApiTest extends \PHPUnit\Framework\TestCase
     /**
      * Test an Authentication exception is thrown when providing an in valid API Key.
      *
-     * @expectedException \Swiftype\Exception\AuthenticationException
+     * @expectedException \Elastic\OpenApi\Codegen\Exception\AuthenticationException
      */
     public function testAuthenticationError()
     {

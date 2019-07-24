@@ -8,7 +8,7 @@
 
 namespace Swiftype\SiteSearch\Tests\Integration;
 
-use Swiftype\Exception\NotFoundException;
+use Elastic\OpenApi\Codegen\Exception\NotFoundException;
 
 /**
  * Integrations test for the Engine API.
@@ -73,7 +73,7 @@ class EngineApiTest extends AbstractClientTestCase
     /**
      * Try to get a non existing engine.
      *
-     * @expectedException \Swiftype\Exception\NotFoundException
+     * @expectedException \Elastic\OpenApi\Codegen\Exception\NotFoundException
      */
     public function testGetNonExistingEngine()
     {
@@ -83,7 +83,7 @@ class EngineApiTest extends AbstractClientTestCase
     /**
      * Try to delete a non existing engine.
      *
-     * @expectedException \Swiftype\Exception\NotFoundException
+     * @expectedException \Elastic\OpenApi\Codegen\Exception\NotFoundException
      */
     public function testDeleteNonExistingEngine()
     {
@@ -93,7 +93,7 @@ class EngineApiTest extends AbstractClientTestCase
     /**
      * Try to create an already existing engine.
      *
-     * @expectedException \Swiftype\Exception\BadRequestException
+     * @expectedException \Elastic\OpenApi\Codegen\Exception\BadRequestException
      */
     public function testCreateAlreadyExistingEngine()
     {

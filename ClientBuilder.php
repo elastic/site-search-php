@@ -11,11 +11,11 @@ namespace Swiftype\SiteSearch;
 /**
  * Use this class to instantiate new client and all their dependencies.
  *
- * @package Swiftype\Site
+ * @package Swiftype\SiteSearch
  *
  * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
-class ClientBuilder extends \Swiftype\AbstractClientBuilder
+class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
 {
     /**
      * @var string
@@ -76,7 +76,7 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
     {
         $handler = parent::getHandler();
         $handler = new Connection\Handler\RequestAuthenticationHandler($handler, $this->apiKey);
-        $handler = new \Swiftype\Connection\Handler\RequestUrlPrefixHandler($handler, self::URI_PREFIX);
+        $handler = new \Elastic\OpenApi\Codegen\Connection\Handler\RequestUrlPrefixHandler($handler, self::URI_PREFIX);
         $handler = new Connection\Handler\ApiErrorHandler($handler);
 
         return $handler;
@@ -87,6 +87,6 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
      */
     protected function getEndpointBuilder()
     {
-        return new \Swiftype\Endpoint\Builder(__NAMESPACE__ . "\Endpoint");
+        return new \Elastic\OpenApi\Codegen\Endpoint\Builder(__NAMESPACE__ . "\Endpoint");
     }
 }

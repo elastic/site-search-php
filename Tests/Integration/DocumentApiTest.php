@@ -8,7 +8,7 @@
 
 namespace Swiftype\SiteSearch\Tests\Integration;
 
-use Swiftype\Exception\NotFoundException;
+use Elastic\OpenApi\Codegen\Exception\NotFoundException;
 
 /**
  * Integrations test for the Document API.

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,8 +12,6 @@ namespace Elastic\SiteSearch\Client\Tests\Integration;
  * Integrations test for the Bulk Document API.
  *
  * @package Elastic\SiteSearch\Client\Test\Integration
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
 class BulkDocumentApiTest extends AbstractEngineTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,8 +14,6 @@ use GuzzleHttp\Ring\Core;
  * This handler add automatically the API Key to the request.
  *
  * @package Elastic\SiteSearch\Client\Connection\Handler
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
  */
 class RequestAuthenticationHandler
 {

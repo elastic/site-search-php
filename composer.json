@@ -1,11 +1,11 @@
 {
-  "name" : "swiftype/swiftype-site-search-php",
-  "description" : "Swiftype Site Search Official PHP Client",
-  "homepage": "https://github.com/swiftype/swiftype-site-search-php",
+  "name" : "elastic/site-search-php",
+  "description" : "Elastic Site Search Official PHP Client",
+  "homepage": "https://github.com/elastic/site-search-php",
   "keywords" : [
     "search",
     "client",
-    "swiftype",
+    "elastic",
     "php"
   ],
   "license" : "Apache-2.0",

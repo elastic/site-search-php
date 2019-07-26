@@ -74,6 +74,7 @@ class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
     {
         $handler = parent::getHandler();
         $handler = new Connection\Handler\RequestAuthenticationHandler($handler, $this->apiKey);
+        $handler = new Connection\Handler\RequestClientHeaderHandler($handler);
         $handler = new \Elastic\OpenApi\Codegen\Connection\Handler\RequestUrlPrefixHandler($handler, self::URI_PREFIX);
         $handler = new Connection\Handler\ApiErrorHandler($handler);
 

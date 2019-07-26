@@ -33,7 +33,7 @@ class RequestClientHeaderHandlerTest extends TestCase
         $this->assertArrayHasKey('X-Swiftype-Client', $response);
         $this->assertArrayHasKey('X-Swiftype-Client-Version', $response);
 
-        $this->assertEquals('swiftype-site-search-php', current($response['X-Swiftype-Client']));
+        $this->assertEquals('elastic-site-search-php', current($response['X-Swiftype-Client']));
         $this->assertEquals('1.0.0', current($response['X-Swiftype-Client-Version']));
     }
 }

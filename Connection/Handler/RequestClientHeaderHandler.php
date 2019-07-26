@@ -25,7 +25,7 @@ class RequestClientHeaderHandler
     /**
      * @var string
      */
-    const CLIENT_NAME_VALUE = 'swiftype-site-search-php';
+    const CLIENT_NAME_VALUE = 'elastic-site-search-php';
 
     /**
      * @var string

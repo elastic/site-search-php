@@ -1,27 +1,25 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Integration;
+namespace Elastic\SiteSearch\Client\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
-use Swiftype\SiteSearch\ClientBuilder;
+use Elastic\SiteSearch\Client\ClientBuilder;
 
 /**
  * A base class for running client tests.
  *
- * @package Swiftype\SiteSearch\Test\Integration
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
+ * @package Elastic\SiteSearch\Client\Test\Integration
  */
 class AbstractClientTestCase extends TestCase
 {
     /**
-     * @var \Swiftype\SiteSearch\Client
+     * @var \Elastic\SiteSearch\Client\Client
      */
     private static $defaultClient;
 
@@ -34,7 +32,7 @@ class AbstractClientTestCase extends TestCase
     }
 
     /**
-     * @return \Swiftype\SiteSearch\Client
+     * @return \Elastic\SiteSearch\Client\Client
      */
     protected static function getDefaultClient()
     {

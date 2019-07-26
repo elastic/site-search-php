@@ -1,19 +1,19 @@
 <?php
 /**
- * This file is part of the Swiftype PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Endpoint;
+namespace Elastic\SiteSearch\Client\Endpoint;
 
 /**
- * Implementation of the  endpoint.
+ * Implementation of the LogClickthrough endpoint.
  *
- * @package Swiftype\SiteSearch\Endpoint
+ * @package Elastic\SiteSearch\Client\Endpoint
  */
-class LogClickthrough extends \Swiftype\Endpoint\AbstractEndpoint
+class LogClickthrough extends \Elastic\OpenApi\Codegen\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**

@@ -1,23 +1,21 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Unit\Connection\Handler;
+namespace Elastic\SiteSearch\Client\Tests\Unit\Connection\Handler;
 
 use PHPUnit\Framework\TestCase;
-use Swiftype\SiteSearch\Client;
-use Swiftype\SiteSearch\ClientBuilder;
+use Elastic\SiteSearch\Client\Client;
+use Elastic\SiteSearch\Client\ClientBuilder;
 
 /**
  * Check the client builder is able to instantiate new clients.
  *
- * @package Swiftype\SiteSearch\Test\Unit
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
+ * @package Elastic\SiteSearch\Client\Test\Unit
  */
 class ClientBuilderTest extends TestCase
 {

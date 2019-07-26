@@ -1,6 +1,6 @@
-<p align="center"><img src="https://github.com/swiftype/swiftype-site-search-php/blob/master/logo-site-search.png?raw=true" alt="Elastic Site Search Logo"></p>
+<p align="center"><img src="https://github.com/elastic/site-search-php/blob/master/logo-site-search.png?raw=true" alt="Elastic Site Search Logo"></p>
 
-<p align="center"><a href="https://circleci.com/gh/swiftype/swiftype-site-search-php"><img src="https://circleci.com/gh/swiftype/swiftype-site-search-php.svg?style=svg&circle-token=9a11fb27c1d6961bb8887b684b0c7707b3b4eb6e" alt="CircleCI build"></a></p>
+<p align="center"><a href="https://circleci.com/gh/elastic/site-search-php"><img src="https://circleci.com/gh/elastic/site-search-php.svg?style=svg&circle-token=92b65f3d23e30db2d91a0e2a713b1ac87c07f812" alt="CircleCI build"></a></p>
 
 > A first-party PHP client for the [Elastic Site Search API](https://swiftype.com/documentation/site-search/overview).
 
@@ -17,12 +17,12 @@
 
 ## Getting started 🐣
 
-Using this client assumes that you have already created a Site Search account on https://swiftype.com/.
+Using this client assumes that you have already created a Site Search account on https://www.elastic.co/products/site-search.
 
 You can install the client in your project by using composer:
 
 ```bash
-composer require swiftype/swiftype-site-search-php
+composer require elastic/elastic-site-search-php
 ```
 
 ## Usage
@@ -31,18 +31,18 @@ composer require swiftype/swiftype-site-search-php
 
 #### Basic client instantiation
 
-To instantiate a new client you can use `\Swiftype\SiteSearch\ClientBuilder`:
+To instantiate a new client you can use `\Elastic\SiteSearch\Client\ClientBuilder`:
 
 ```php
   $apiKey        = 'XXXXXXXXXXXX';
-  $clientBuilder = \Swiftype\SiteSearch\ClientBuilder::create($apiKey);
+  $clientBuilder = \Elastic\SiteSearch\Client\ClientBuilder::create($apiKey);
 
   $client = $clientBuilder->build();
 ```
 
 **Notes:**
 
-- The resulting client will be of type `\Swiftype\SiteSearch\Client`
+- The resulting client will be of type `\Elastic\SiteSearch\Client\Client`
 
 - You can find the API endpoint and your API key URL in your Site Search account: https://app.swiftype.com/settings/account.
 
@@ -193,20 +193,20 @@ Code for the endpoints is generated automatically using a custom version of [Ope
 To regenerate endpoints, use the docker laucher packaged in `vendor/bin`:
 
 ```bash
-./vendor/bin/swiftype-codegen.sh
+./vendor/bin/elastic-openapi-codegen.sh
 ```
 
 The custom generator will be built and launched using the following Open API spec file : `resources/api/api-spec.yml`.
 
-You can then create a PR with the modified api-spec file and your endpoints code files.
+You can then commit and PR the modified api-spec file and your endpoints code files.
 
-The client class and README may be changed in some cases. Do not forget to include them in your commit!
+The client class and readme may be changed in some cases. Do not forget to include them in your commit!
 
 ## FAQ 🔮
 
 ### Where do I report issues with the client?
 
-If something is not working as expected, please open an [issue](https://github.com/swiftype/swiftype-site-search-php/issues/new).
+If something is not working as expected, please open an [issue](https://github.com/elastic/site-search-php/issues/new).
 
 ### Where can I find the full API documentation ?
 
@@ -220,12 +220,12 @@ You can checkout the [Elastic community discuss forums](https://discuss.elastic.
 
 We welcome contributors to the project. Before you begin, a couple notes...
 
-+ Before opening a pull request, please create an issue to [discuss the scope of your proposal](https://github.com/swiftype/swiftype-site-search-php/issues).
++ Before opening a pull request, please create an issue to [discuss the scope of your proposal](https://github.com/elastic/site-search-php/issues).
 + Please write simple code and concise documentation, when appropriate.
 
 ## License 📗
 
-[Apache 2.0](https://github.com/swiftype/swiftype-site-search-php/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
+[Apache 2.0](https://github.com/elastic/site-search-php/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
 
-Thank you to all the [contributors](https://github.com/swiftype/swiftype-site-search-php/graphs/contributors)!
+Thank you to all the [contributors](https://github.com/elastic/site-search-php/graphs/contributors)!
 

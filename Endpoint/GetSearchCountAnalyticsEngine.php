@@ -1,19 +1,19 @@
 <?php
 /**
- * This file is part of the Swiftype PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Endpoint;
+namespace Elastic\SiteSearch\Client\Endpoint;
 
 /**
- * Implementation of the  endpoint.
+ * Implementation of the GetSearchCountAnalyticsEngine endpoint.
  *
- * @package Swiftype\SiteSearch\Endpoint
+ * @package Elastic\SiteSearch\Client\Endpoint
  */
-class GetSearchCountAnalyticsEngine extends \Swiftype\Endpoint\AbstractEndpoint
+class GetSearchCountAnalyticsEngine extends \Elastic\OpenApi\Codegen\Endpoint\AbstractEndpoint
 {
     // phpcs:disable
     /**

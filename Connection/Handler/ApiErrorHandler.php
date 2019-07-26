@@ -1,25 +1,23 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Connection\Handler;
+namespace Elastic\SiteSearch\Client\Connection\Handler;
 
 use GuzzleHttp\Ring\Core;
-use Swiftype\Exception\ApiException;
-use Swiftype\Exception\AuthenticationException;
-use Swiftype\Exception\BadRequestException;
-use Swiftype\Exception\NotFoundException;
+use Elastic\OpenApi\Codegen\Exception\ApiException;
+use Elastic\OpenApi\Codegen\Exception\AuthenticationException;
+use Elastic\OpenApi\Codegen\Exception\BadRequestException;
+use Elastic\OpenApi\Codegen\Exception\NotFoundException;
 
 /**
  * This handler manage server side errors and throw comprehensive exceptions to the user.
  *
- * @package Swiftype\SiteSearch\Connection\Handler
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
+ * @package Elastic\SiteSearch\Client\Connection\Handler
  */
 class ApiErrorHandler
 {

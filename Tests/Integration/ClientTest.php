@@ -1,22 +1,20 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Integration;
+namespace Elastic\SiteSearch\Client\Tests\Integration;
 
-use Swiftype\SiteSearch\ClientBuilder;
-use Swiftype\SiteSearch\Client;
+use Elastic\SiteSearch\Client\ClientBuilder;
+use Elastic\SiteSearch\Client\Client;
 
 /**
  * Testing client instantiaton and error handling.
  *
- * @package Swiftype\SiteSearch\Test\Integration
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
+ * @package Elastic\SiteSearch\Client\Test\Integration
  */
 class ClientApiTest extends \PHPUnit\Framework\TestCase
 {
@@ -32,7 +30,7 @@ class ClientApiTest extends \PHPUnit\Framework\TestCase
     /**
      * Test an Authentication exception is thrown when providing an in valid API Key.
      *
-     * @expectedException \Swiftype\Exception\AuthenticationException
+     * @expectedException \Elastic\OpenApi\Codegen\Exception\AuthenticationException
      */
     public function testAuthenticationError()
     {

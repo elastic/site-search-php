@@ -1,19 +1,17 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Integration;
+namespace Elastic\SiteSearch\Client\Tests\Integration;
 
 /**
  * A base class for running client tests with a default engine and some sample optional docs.
  *
- * @package Swiftype\SiteSearch\Test\Integration
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
+ * @package Elastic\SiteSearch\Client\Test\Integration
  */
 class AbstractEngineTestCase extends AbstractClientTestCase
 {

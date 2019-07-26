@@ -1,21 +1,19 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch;
+namespace Elastic\SiteSearch\Client;
 
 /**
  * Use this class to instantiate new client and all their dependencies.
  *
- * @package Swiftype\Site
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
+ * @package Elastic\SiteSearch\Client
  */
-class ClientBuilder extends \Swiftype\AbstractClientBuilder
+class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
 {
     /**
      * @var string
@@ -38,7 +36,7 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
      * @param string $hostIdentifier
      * @param string $apiKey
      *
-     * @return \Swiftype\SiteSearch\ClientBuilder
+     * @return \Elastic\SiteSearch\Client\ClientBuilder
      */
     public static function create($apiKey = null)
     {
@@ -62,7 +60,7 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
     /**
      * Return the configured Swiftype client.
      *
-     * @return \Swiftype\SiteSearch\Client
+     * @return \Elastic\SiteSearch\Client\Client
      */
     public function build()
     {
@@ -76,7 +74,7 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
     {
         $handler = parent::getHandler();
         $handler = new Connection\Handler\RequestAuthenticationHandler($handler, $this->apiKey);
-        $handler = new \Swiftype\Connection\Handler\RequestUrlPrefixHandler($handler, self::URI_PREFIX);
+        $handler = new \Elastic\OpenApi\Codegen\Connection\Handler\RequestUrlPrefixHandler($handler, self::URI_PREFIX);
         $handler = new Connection\Handler\ApiErrorHandler($handler);
 
         return $handler;
@@ -87,6 +85,6 @@ class ClientBuilder extends \Swiftype\AbstractClientBuilder
      */
     protected function getEndpointBuilder()
     {
-        return new \Swiftype\Endpoint\Builder(__NAMESPACE__ . "\Endpoint");
+        return new \Elastic\OpenApi\Codegen\Endpoint\Builder(__NAMESPACE__ . "\Endpoint");
     }
 }

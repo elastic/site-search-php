@@ -1,11 +1,11 @@
 {
-  "name" : "swiftype/swiftype-site-search-php",
-  "description" : "Swiftype Site Search Official PHP Client",
-  "homepage": "https://github.com/swiftype/swiftype-site-search-php",
+  "name" : "elastic/site-search-php",
+  "description" : "Elastic Site Search Official PHP Client",
+  "homepage": "https://github.com/elastic/site-search-php",
   "keywords" : [
     "search",
     "client",
-    "swiftype",
+    "elastic",
     "php"
   ],
   "license" : "Apache-2.0",
@@ -15,7 +15,7 @@
   ],
   "require" : {
     "php" : "^5.6|^7.0",
-    "swiftype/swiftype-common-php" : "^1.1.2",
+    "elastic/openapi-codegen" : "^1.0.1",
     "psr/log" : "^1.0."
   },
   "require-dev" : {
@@ -27,7 +27,7 @@
   },
   "autoload" : {
     "psr-4" : {
-      "Swiftype\\SiteSearch\\" : ""
+      "Elastic\\SiteSearch\\Client\\" : ""
     },
     "exclude-from-classmap" : [
       "/Tests/"

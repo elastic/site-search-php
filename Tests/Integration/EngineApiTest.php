@@ -1,21 +1,19 @@
 <?php
 /**
- * This file is part of the Swiftype Site Search PHP Client package.
+ * This file is part of the Elastic Site Search PHP Client package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Swiftype\SiteSearch\Tests\Integration;
+namespace Elastic\SiteSearch\Client\Tests\Integration;
 
-use Swiftype\Exception\NotFoundException;
+use Elastic\OpenApi\Codegen\Exception\NotFoundException;
 
 /**
  * Integrations test for the Engine API.
  *
- * @package Swiftype\SiteSearch\Test\Integration
- *
- * @author  Aurélien FOUCRET <aurelien.foucret@elastic.co>
+ * @package Elastic\SiteSearch\Client\Test\Integration
  */
 class EngineApiTest extends AbstractClientTestCase
 {
@@ -73,7 +71,7 @@ class EngineApiTest extends AbstractClientTestCase
     /**
      * Try to get a non existing engine.
      *
-     * @expectedException \Swiftype\Exception\NotFoundException
+     * @expectedException \Elastic\OpenApi\Codegen\Exception\NotFoundException
      */
     public function testGetNonExistingEngine()
     {
@@ -83,7 +81,7 @@ class EngineApiTest extends AbstractClientTestCase
     /**
      * Try to delete a non existing engine.
      *
-     * @expectedException \Swiftype\Exception\NotFoundException
+     * @expectedException \Elastic\OpenApi\Codegen\Exception\NotFoundException
      */
     public function testDeleteNonExistingEngine()
     {
@@ -93,7 +91,7 @@ class EngineApiTest extends AbstractClientTestCase
     /**
      * Try to create an already existing engine.
      *
-     * @expectedException \Swiftype\Exception\BadRequestException
+     * @expectedException \Elastic\OpenApi\Codegen\Exception\BadRequestException
      */
     public function testCreateAlreadyExistingEngine()
     {

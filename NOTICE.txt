@@ -1,2 +1,3 @@
-swiftype-site-search-php
+Elastic Site Search PHP client.
+
 Copyright 2012-2019 Elasticsearch B.V.

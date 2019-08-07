@@ -1,6 +1,11 @@
 <p align="center"><img src="https://github.com/elastic/site-search-php/blob/master/logo-site-search.png?raw=true" alt="Elastic Site Search Logo"></p>
 
-<p align="center"><a href="https://circleci.com/gh/elastic/site-search-php"><img src="https://circleci.com/gh/elastic/site-search-php.svg?style=svg&circle-token=92b65f3d23e30db2d91a0e2a713b1ac87c07f812" alt="CircleCI build"></a></p>
+<p align="center">
+  <img src="https://img.shields.io/packagist/l/elastic/site-search" />
+  <a href="https://github.com/elastic/site-search-php/releases"><img src="https://img.shields.io/github/release/elastic/site-search-php/all.svg?style=flat-square" alt="GitHub release" /></a>
+  <a href="https://circleci.com/gh/elastic/site-search-php"><img src="https://img.shields.io/circleci/build/github/elastic/site-search-php/master" alt="CircleCI build" /></a>
+  <img src="https://img.shields.io/librariesio/github/elastic/site-search-php" alt="Dependencies status"/>
+</p>
 
 > A first-party PHP client for the [Elastic Site Search API](https://swiftype.com/documentation/site-search/overview).
 
@@ -228,4 +233,3 @@ We welcome contributors to the project. Before you begin, a couple notes...
 [Apache 2.0](https://github.com/elastic/site-search-php/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
 
 Thank you to all the [contributors](https://github.com/elastic/site-search-php/graphs/contributors)!
-

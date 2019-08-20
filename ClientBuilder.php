@@ -58,7 +58,7 @@ class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
     }
 
     /**
-     * Return the configured Swiftype client.
+     * Return the configured Site Search client.
      *
      * @return \Elastic\SiteSearch\Client\Client
      */

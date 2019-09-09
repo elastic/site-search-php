@@ -39,7 +39,7 @@ commands:
     - checkout
     - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum "composer.json" }}
+        - v2-dependencies-{{ checksum "composer.json" }}
     - attach_workspace:
         at: .
     - run:
@@ -48,7 +48,7 @@ commands:
     - save_cache:
         paths:
         - ~/.composer/cache/
-        key: v1-dependencies-{{ checksum "composer.json" }}
+        key: v2-dependencies-{{ checksum "composer.json" }}
     - persist_to_workspace:
         root: .
         paths:

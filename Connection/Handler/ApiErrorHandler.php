@@ -13,6 +13,7 @@ use Elastic\OpenApi\Codegen\Exception\ApiException;
 use Elastic\OpenApi\Codegen\Exception\AuthenticationException;
 use Elastic\OpenApi\Codegen\Exception\BadRequestException;
 use Elastic\OpenApi\Codegen\Exception\NotFoundException;
+use Elastic\SiteSearch\Client\Exception\ApiRateExceededException;
 
 /**
  * This handler manage server side errors and throw comprehensive exceptions to the user.
@@ -50,6 +51,9 @@ class ApiErrorHandler
             if ($response['status'] >= 400) {
                 $exception = new ApiException($this->getErrorMessage($response));
                 switch ($response['status']) {
+                    case 400:
+                        $exception = new BadRequestException($exception->getMessage());
+                        break;
                     case 401:
                     case 403:
                         $exception = new AuthenticationException($exception->getMessage());
@@ -57,8 +61,8 @@ class ApiErrorHandler
                     case 404:
                         $exception = new NotFoundException($exception->getMessage());
                         break;
-                    case 400:
-                        $exception = new BadRequestException($exception->getMessage());
+                    case 429:
+                        $exception = $this->getApiRateExceededException($exception->getMessage(), $response);
                         break;
                 }
 
@@ -89,5 +93,29 @@ class ApiErrorHandler
         }
 
         return is_array($message) ? implode(' ', $message) : $message;
+    }
+
+    /**
+     * Build an ApiRateExceededException from the response.
+     *
+     * @param string $message
+     * @param array  $response
+     *
+     * @return ApiRateExceededException
+     */
+    private function getApiRateExceededException($message, $response)
+    {
+        $limit = null;
+        $retryAfter = null;
+
+        if (Core::hasHeader($response, RateLimitLoggingHandler::RATE_LIMIT_LIMIT_HEADER_NAME)) {
+            $limit = Core::firstHeader($response, RateLimitLoggingHandler::RATE_LIMIT_LIMIT_HEADER_NAME);
+        }
+
+        if (Core::hasHeader($response, RateLimitLoggingHandler::RETRY_AFTER_HEADER_NAME)) {
+            $retryAfter = Core::firstHeader($response, RateLimitLoggingHandler::RETRY_AFTER_HEADER_NAME);
+        }
+
+        return new ApiRateExceededException($message, $limit, $retryAfter);
     }
 }

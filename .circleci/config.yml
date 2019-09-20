@@ -133,20 +133,35 @@ workflows:
   php-73-tests:
     jobs:
     - php-73-unit-tests
-    - php-73-integration-tests
+    - php-73-integration-tests:
+        filters:
+            branches:
+              ignore: /pull.*/
   php-72-tests:
     jobs:
     - php-72-unit-tests
-    - php-72-integration-tests
+    - php-72-integration-tests:
+        filters:
+            branches:
+              ignore: /pull.*/
   php-71-tests:
     jobs:
     - php-71-unit-tests
-    - php-71-integration-tests
+    - php-71-integration-tests:
+        filters:
+            branches:
+              ignore: /pull.*/
   php-70-tests:
     jobs:
     - php-70-unit-tests
-    - php-70-integration-tests
+    - php-70-integration-tests:
+        filters:
+            branches:
+              ignore: /pull.*/
   php-56-tests:
     jobs:
     - php-56-unit-tests
-    - php-56-integration-tests
+    - php-56-integration-tests:
+        filters:
+            branches:
+              ignore: /pull.*/

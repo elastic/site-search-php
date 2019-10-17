@@ -31,6 +31,11 @@ class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
     private $apiKey;
 
     /**
+     * @var string
+     */
+    private $integration;
+
+    /**
      * Instantiate a new client builder.
      *
      * @param string $hostIdentifier
@@ -58,6 +63,20 @@ class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
     }
 
     /**
+     * Set integration name & version for the client.
+     *
+     * @param string $integration
+     *
+     * @return ClientBuilder
+     */
+    public function setIntegration($integration)
+    {
+        $this->integration = $integration;
+
+        return $this;
+    }
+
+    /**
      * Return the configured Site Search client.
      *
      * @return \Elastic\SiteSearch\Client\Client
@@ -74,7 +93,7 @@ class ClientBuilder extends \Elastic\OpenApi\Codegen\AbstractClientBuilder
     {
         $handler = parent::getHandler();
         $handler = new Connection\Handler\RequestAuthenticationHandler($handler, $this->apiKey);
-        $handler = new Connection\Handler\RequestClientHeaderHandler($handler);
+        $handler = new Connection\Handler\RequestClientHeaderHandler($handler, $this->integration);
         $handler = new \Elastic\OpenApi\Codegen\Connection\Handler\RequestUrlPrefixHandler($handler, self::URI_PREFIX);
         $handler = new Connection\Handler\ApiErrorHandler($handler);
 

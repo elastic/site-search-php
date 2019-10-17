@@ -36,4 +36,24 @@ class RequestClientHeaderHandlerTest extends TestCase
         $this->assertEquals('elastic-site-search-php', current($response['X-Swiftype-Client']));
         $this->assertEquals('1.0.0', current($response['X-Swiftype-Client-Version']));
     }
+
+    /**
+     * Check the reporting headers is present and contains the right value.
+     */
+    public function testAddAuthHeaderWithIntegrationName()
+    {
+        $handler = function ($request) {
+            return $request['headers'];
+        };
+
+        $requestHandler = new RequestClientHeaderHandler($handler, 'integration:2.1.1');
+        $response = $requestHandler([]);
+
+        $this->assertArrayHasKey('X-Swiftype-Client', $response);
+        $this->assertArrayHasKey('X-Swiftype-Client-Version', $response);
+        $this->assertArrayHasKey('X-Swiftype-Integration', $response);
+        $this->assertArrayHasKey('X-Swiftype-Integration-Version', $response);
+        $this->assertEquals(['integration'], $response['X-Swiftype-Integration']);
+        $this->assertEquals(['2.1.1'], $response['X-Swiftype-Integration-Version']);
+    }
 }

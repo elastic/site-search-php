@@ -114,7 +114,7 @@ jobs:
     - install_deps
     - run:
         name:
-        command: vendor/bin/phplint . --exclude=vendor
+        command: echo test; vendor/bin/phplint . --exclude=vendor
 
   qa-phpcs:
     <<: *php73

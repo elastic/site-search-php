@@ -9,28 +9,32 @@ integration_tests: &integration_tests
   environment:
     ST_ENGINE_NAME: php-integration-test-$CIRCLE_BUILD_NUM
   steps:
-  - install_deps
-  - run_integration_tests
+    - install_deps
+    - run_integration_tests
+
+php81: &php81
+  docker:
+  - image: cimg/php:8.1.7-browsers
 
 php73: &php73
   docker:
-  - image: circleci/php:7.3-browsers
+  - image: cimg/php:7.3-browsers
 
 php72: &php72
   docker:
-  - image: circleci/php:7.2-browsers
+  - image: cimg/php:7.2-browsers
 
 php71: &php71
   docker:
-  - image: circleci/php:7.1-browsers
+  - image: cimg/php:7.1-browsers
 
 php70: &php70
   docker:
-  - image: circleci/php:7.0-browsers
+  - image: cimg/php:7.0-browsers
 
 php56: &php56
   docker:
-  - image: circleci/php:5.6-browsers
+  - image: cimg/php:5.6-browsers
 
 commands:
 
@@ -67,6 +71,13 @@ commands:
         command: ST_ENGINE_NAME="php-integration-test-$CIRCLE_BUILD_NUM" vendor/bin/phpunit -c phpunit.xml.dist --testsuite integration
 
 jobs:
+  php-81-unit-tests:
+    <<: *unit_tests
+    <<: *php81
+
+  php-81-integration-tests:
+    <<: *integration_tests
+    <<: *php81
 
   php-73-unit-tests:
     <<: *unit_tests
@@ -130,6 +141,14 @@ workflows:
     jobs:
     - qa-phplint
     - qa-phpcs
+  
+  php-81-tests:
+    jobs:
+    - php-81-unit-tests
+    - php-81-integration-tests:
+        filters:
+            branches:
+              ignore: /pull.*/
   php-73-tests:
     jobs:
     - php-73-unit-tests

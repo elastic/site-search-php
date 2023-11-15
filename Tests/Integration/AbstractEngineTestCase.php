@@ -20,7 +20,7 @@ class AbstractEngineTestCase extends AbstractClientTestCase
     /**
      * Create the default engine before lauching tests.
      */
-    public static function setupBeforeClass(): void
+    public static function setupBeforeClass()
     {
         parent::setUpBeforeClass();
         self::getDefaultClient()->createEngine(self::getDefaultEngineName());
@@ -30,7 +30,7 @@ class AbstractEngineTestCase extends AbstractClientTestCase
     /**
      * Delete the default engine before exiting the class.
      */
-    public static function tearDownAfterClass(): void
+    public static function tearDownAfterClass()
     {
         self::getDefaultClient()->deleteEngine(self::getDefaultEngineName());
     }

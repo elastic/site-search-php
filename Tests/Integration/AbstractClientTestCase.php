@@ -26,7 +26,7 @@ class AbstractClientTestCase extends TestCase
     /**
      * Init a default client to run all the tests.
      */
-    public static function setupBeforeClass(): void
+    public static function setupBeforeClass()
     {
         self::$defaultClient = ClientBuilder::create($_ENV['ST_API_KEY'])->build();
     }

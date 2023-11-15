@@ -25,7 +25,7 @@ class EngineApiTest extends AbstractClientTestCase
     /**
      * Delete the engines created during the test.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         foreach ($this->engines as $engineName) {
             try {

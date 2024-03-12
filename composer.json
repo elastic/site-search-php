@@ -15,7 +15,7 @@
   ],
   "require" : {
     "php" : "^5.6|^7.0|^8.0",
-    "elastic/openapi-codegen" : "dev-fix/psr-log-version",
+    "elastic/openapi-codegen" : "^1.0.6",
     "psr/log" : "^1|^2|^3"
   },
   "require-dev" : {
